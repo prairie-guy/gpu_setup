@@ -5,9 +5,20 @@
 # Install a generally useful environment
 # This script is designed to work with ubuntu 16.04 LTS
 
-# USE: git clone https://github.com/prairie-guy/gpu_setup.git
-#     ./gpu_setup.sh
+# USE: 1) Install git
+#      2) git clone https://github.com/prairie-guy/gpu_setup.git
+#      3) gpu_setup/install-gpu.sh
 
+# Installation directory
+setup_dir=gpu_setup
+
+# Install personal dotfiles for bash and ssh
+cd
+mkdir ~/.ssh
+cp $setup_dir/authorized_keys ~/.ssh/.
+cp -r $setupu_dir/dot_files/* ~/.
+
+# Install
 set -e
 set -o xtrace
 DEBIAN_FRONTEND=noninteractive
@@ -105,17 +116,6 @@ make
 make install
 cd
 
-# Set up dotfile
-mkdir ~/.ssh
-cp authorized_keys ~/.ssh/.
-cp -r dot_files/* ~/.
-
-# Set up emacs
-git clone git@github.com:prairie-guy/emacs_dotfile.git .emacs.d    
-cd .emacs.d
-./setup.sh
-cd
-
 # Kaggle 
 pip install kaggle-cli
 
@@ -128,3 +128,11 @@ unzip -q dogscats.zip
 cd ../fastai/courses/dl1/
 ln -s ~/data ./
 cd
+
+# Set up emacs
+# May fail...
+git clone git@github.com:prairie-guy/emacs_dotfile.git .emacs.d
+cd .emacs.d
+./setup.sh
+cd
+
