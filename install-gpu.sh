@@ -37,7 +37,7 @@ sudo apt -y autoremove
 sudo apt-get --assume-yes install openssh-server
 
 # Add some key packages
-sudo apt-get --assume-yes install tmux build-essential gcc g++ make binutils emacs24-nox git zip software-properties-common
+sudo apt-get --assume-yes install tmux build-essential gcc g++ make binutils emacs24-nox git zip software-properties-common curl
 
 # Create local download dir
 mkdir downloads
@@ -83,12 +83,16 @@ echo "c.NotebookApp.open_browser = False" >> ~/.jupyter/jupyter_notebook_config.
 # Add Jupyter Notebook Extensions, most importantly "Select CodeMirror Keymap" allows for emacs mode.
 pip install ipywidgets
 jupyter nbextension enable --py widgetsnbextension --sys-prefix
-pip install jupyter_contrib_nbextensions
-conda install -c conda-forge jupyter_contrib_nbextensions
-jupyter contrib nbextension install --user
+
+# Add Jupyter Notebook Extensions, most importantly "Select CodeMirror Keymap" allows for emacs mode.
+# !!! Buggy within fasti environment
+# !!! Hand install
+# pip install jupyter_contrib_nbextensions
+# conda install -c conda-forge jupyter_contrib_nbextensions
+# jupyter contrib nbextension install --user
 
 
-# Install and Configure Julia
+# Install Julia and setup to work with Juypter
 # EDIT FOR MOST RECENT VERSION OF JULIA
 JULIA_VERSION=julia-0.6.2-linux-x86_64.tar.gz
 cd
@@ -97,20 +101,17 @@ mkdir tmp
 tar xfv $JULIA_VERSION -C tmp
 mv tmp/julia* julia
 rm -fr tmp
-
-# Allow Julia to work on jupyter
-# If upgrading julia, install new version of julia and remove prior install of IJulia: rm -fr /home/cdaniels/.julia/v0.6/IJulia/
+echo 'export PATH="/home/cdaniels/julia/bin:$PATH"'  >> ~/.bashrc
 julia -e 'Pkg.update()'
 julia -e 'Pkg.add("IJulia")'
 
-# Export Julia to PATH
-echo 'export PATH="/home/cdaniels/julia/bin:$PATH"'  >> ~/.bashrc
 
 # Install Clojure for Juypter
-git clone https://github.com/roryk/clojupyter
-cd clojupyter
-make
-make install
+# !!! Need to install lein first
+# git clone https://github.com/roryk/clojupyter
+# cd clojupyter
+# make
+# make install
 
 # Kaggle 
 pip install kaggle-cli
@@ -131,4 +132,3 @@ git clone git@github.com:prairie-guy/emacs_dotfile.git .emacs.d
 cd .emacs.d
 ./setup.sh
 cd
-
