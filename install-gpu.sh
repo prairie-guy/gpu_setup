@@ -13,6 +13,7 @@
 mkdir ~/.ssh
 cp authorized_keys ~/.ssh/.
 cp -r dot_files/* ~/.
+cd
 
 # Install
 set -e
