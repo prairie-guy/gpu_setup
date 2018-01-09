@@ -133,3 +133,4 @@ cd .emacs.d
 ./setup.sh
 cd
 echo "install-gpu.sh: complete"
+
