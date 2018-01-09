@@ -69,6 +69,8 @@ export PATH=~/anaconda3/bin:$PATH
 source ~/.bashrc
 conda env update
 echo 'source activate fastai' >> ~/.bashrc
+echo 'alias fastai-start="source deactivate; source activate fastai"' >> ~/.bashrc
+echo 'alias fastai-stop="source deactivate"' >> ~/.bashrc
 source activate fastai
 source ~/.bashrc
 cd 
@@ -102,6 +104,7 @@ tar xfv $JULIA_VERSION -C tmp
 mv tmp/julia* julia
 rm -fr tmp
 echo 'export PATH="/home/cdaniels/julia/bin:$PATH"'  >> ~/.bashrc
+export PATH="/home/cdaniels/julia/bin:$PATH"
 julia -e 'Pkg.update()'
 julia -e 'Pkg.add("IJulia")'
 
