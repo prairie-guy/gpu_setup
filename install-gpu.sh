@@ -9,14 +9,10 @@
 #      2) git clone https://github.com/prairie-guy/gpu_setup.git
 #      3) gpu_setup/install-gpu.sh
 
-# Installation directory
-setup_dir=gpu_setup
-
 # Install personal dotfiles for bash and ssh
-cd
 mkdir ~/.ssh
-cp $setup_dir/authorized_keys ~/.ssh/.
-cp -r $setupu_dir/dot_files/* ~/.
+cp authorized_keys ~/.ssh/.
+cp -r dot_files/* ~/.
 
 # Install
 set -e
