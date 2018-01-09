@@ -70,7 +70,11 @@ echo 'alias fastai-start="source deactivate; source activate fastai"' >> ~/.bash
 echo 'alias fastai-stop="source deactivate"' >> ~/.bashrc
 source activate fastai
 source ~/.bashrc
-cd 
+cd
+
+## Install Tensorflow and Keras
+conda install tensorflow-gpu
+conda install keras
 
 ## Jupyter Setup
 jupyter notebook --generate-config
