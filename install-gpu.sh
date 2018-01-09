@@ -135,3 +135,4 @@ git clone https://github.com/prairie-guy/emacs_dotfile.git .emacs.d
 cd .emacs.d
 ./setup.sh
 cd
+echo "install-gpu.sh: complete"
