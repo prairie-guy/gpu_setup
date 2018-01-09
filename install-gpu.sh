@@ -40,7 +40,7 @@ sudo apt-get --assume-yes install openssh-server
 sudo apt-get --assume-yes install tmux build-essential gcc g++ make binutils emacs24-nox git zip software-properties-common curl
 
 # Create local download dir
-mkdir downloads
+mkdir ~/downloads
 
 # Install cuda and cudnn
 cd ~/downloads/
