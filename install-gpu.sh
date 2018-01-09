@@ -12,7 +12,7 @@
 # Install personal dotfiles for bash and ssh
 mkdir ~/.ssh
 cp authorized_keys ~/.ssh/.
-cp -r dot_files/* ~/.
+cp -r dot_files/.* ~/.
 cd
 
 # Install
