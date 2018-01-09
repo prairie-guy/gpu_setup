@@ -106,7 +106,7 @@ rm -fr tmp
 echo 'export PATH="/home/cdaniels/julia/bin:$PATH"'  >> ~/.bashrc
 export PATH="/home/cdaniels/julia/bin:$PATH"
 julia -e 'Pkg.update()'
-julia -e 'Pkg.add("IJulia")'
+julia -e 'Pkg.add"IJulia"'
 
 
 # Install Clojure for Juypter
@@ -131,7 +131,7 @@ cd
 
 # Set up emacs
 # May fail...
-git clone git@github.com:prairie-guy/emacs_dotfile.git .emacs.d
+git clone https://github.com/prairie-guy/emacs_dotfile.git .emacs.d
 cd .emacs.d
 ./setup.sh
 cd
