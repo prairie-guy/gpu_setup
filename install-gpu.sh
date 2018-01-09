@@ -106,7 +106,7 @@ rm -fr tmp
 echo 'export PATH="/home/cdaniels/julia/bin:$PATH"'  >> ~/.bashrc
 export PATH="/home/cdaniels/julia/bin:$PATH"
 julia -e 'Pkg.update()'
-julia -e 'Pkg.add"IJulia"'
+julia -e 'Pkg.add("IJulia")'
 
 
 # Install Clojure for Juypter
