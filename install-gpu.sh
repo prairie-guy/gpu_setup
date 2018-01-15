@@ -9,14 +9,11 @@
 #      2) git clone https://github.com/prairie-guy/gpu_setup.git
 #      3) gpu_setup/install-gpu.sh
 
-# Installation directory
-setup_dir=gpu_setup
-
 # Install personal dotfiles for bash and ssh
-cd
 mkdir ~/.ssh
-cp $setup_dir/authorized_keys ~/.ssh/.
-cp -r $setupu_dir/dot_files/* ~/.
+cp authorized_keys ~/.ssh/.
+cp -r dot_files/.* ~/.
+cd
 
 # Install
 set -e
@@ -40,7 +37,7 @@ sudo apt-get --assume-yes install openssh-server
 sudo apt-get --assume-yes install tmux build-essential gcc g++ make binutils emacs24-nox git zip software-properties-common curl
 
 # Create local download dir
-mkdir downloads
+mkdir ~/downloads
 
 # Install cuda and cudnn
 cd ~/downloads/
@@ -73,7 +70,11 @@ echo 'alias fastai-start="source deactivate; source activate fastai"' >> ~/.bash
 echo 'alias fastai-stop="source deactivate"' >> ~/.bashrc
 source activate fastai
 source ~/.bashrc
-cd 
+cd
+
+## Install Tensorflow and Keras
+conda install tensorflow-gpu
+conda install keras
 
 ## Jupyter Setup
 jupyter notebook --generate-config
@@ -105,8 +106,8 @@ mv tmp/julia* julia
 rm -fr tmp
 echo 'export PATH="/home/cdaniels/julia/bin:$PATH"'  >> ~/.bashrc
 export PATH="/home/cdaniels/julia/bin:$PATH"
-julia -e 'Pkg.update'
-julia -e 'Pkg.add"IJulia"'
+julia -e 'Pkg.update()'
+julia -e 'Pkg.add("IJulia")'
 
 
 # Install Clojure for Juypter
@@ -116,7 +117,7 @@ julia -e 'Pkg.add"IJulia"'
 # make
 # make install
 
-# Kaggle 
+# Kaggle
 pip install kaggle-cli
 
 # Add specific fast.ai course files
@@ -135,10 +136,4 @@ git clone https://github.com/prairie-guy/emacs_dotfile.git .emacs.d
 cd .emacs.d
 ./setup.sh
 cd
-
-# Set up google-cloud-sdk
-cd
-curl https://sdk.cloud.google.com | bash
-echo 'export GOOGLE_APPLICATION_CREDENTIALS=/home/cdaniels/google-cloud-sdk/cbd_auth.json'
-touch ~/google-cloud-sdk/cbd_auth.json
-echo 'NEED TO ADD JSON AUTHENTICATION TO THIS FILE'
+echo "install-gpu.sh: complete"
