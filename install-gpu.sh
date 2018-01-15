@@ -105,7 +105,7 @@ mv tmp/julia* julia
 rm -fr tmp
 echo 'export PATH="/home/cdaniels/julia/bin:$PATH"'  >> ~/.bashrc
 export PATH="/home/cdaniels/julia/bin:$PATH"
-julia -e 'Pkg.update()'
+julia -e 'Pkg.update'
 julia -e 'Pkg.add"IJulia"'
 
 
@@ -135,3 +135,10 @@ git clone https://github.com/prairie-guy/emacs_dotfile.git .emacs.d
 cd .emacs.d
 ./setup.sh
 cd
+
+# Set up google-cloud-sdk
+cd
+curl https://sdk.cloud.google.com | bash
+echo 'export GOOGLE_APPLICATION_CREDENTIALS=/home/cdaniels/google-cloud-sdk/cbd_auth.json'
+touch ~/google-cloud-sdk/cbd_auth.json
+echo 'NEED TO ADD JSON AUTHENTICATION TO THIS FILE'
