@@ -137,12 +137,14 @@ cd .emacs.d
 ./setup.sh
 cd
 
+# Set up google-imapes-download
+git clone https://github.com/hardikvasa/google-images-download.git
+
 # Set up google-cloud-sdk
 cd
 curl https://sdk.cloud.google.com | bash
 echo 'export GOOGLE_APPLICATION_CREDENTIALS=/home/cdaniels/google-cloud-sdk/cbd_auth.json'
 touch ~/google-cloud-sdk/cbd_auth.json
 echo 'NEED TO ADD JSON AUTHENTICATION TO THIS FILE'
-
 
 echo "install-gpu.sh: complete"
