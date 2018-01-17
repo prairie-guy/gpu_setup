@@ -15,6 +15,9 @@ cp authorized_keys ~/.ssh/.
 cp -r dot_files/.* ~/.
 cd
 
+# Set up a project directory
+mkdir projects
+
 # Install
 set -e
 set -o xtrace
@@ -61,6 +64,8 @@ cd
 
 git clone https://github.com/fastai/fastai.git
 cd fastai/
+echo 'export PYTHONPATH=$PYTHONPATH:~/fastai' >> ~/.bashrc
+export PYTHONPATH=$PYTHONPATH:~/fastai
 echo 'export PATH=~/anaconda3/bin:$PATH' >> ~/.bashrc
 export PATH=~/anaconda3/bin:$PATH
 source ~/.bashrc
@@ -68,6 +73,7 @@ conda env update
 echo 'source activate fastai' >> ~/.bashrc
 echo 'alias fastai-start="source deactivate; source activate fastai"' >> ~/.bashrc
 echo 'alias fastai-stop="source deactivate"' >> ~/.bashrc
+
 source activate fastai
 source ~/.bashrc
 cd
