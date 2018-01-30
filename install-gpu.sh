@@ -154,7 +154,9 @@ echo "install-gpu.sh: complete"
 
 # Set up ai_utilities
 cd
-git clone https://github.com/prairie-guy/ai_utilities.git
 mkdir bin
-cp ai_utilities/geckodriver bin/
-
+git clone https://github.com/prairie-guy/ai_utilities.git
+cd ai_utilities
+tar xfvz geckodriver-v0.19.1-linux64.tar.gz
+cp geckodriver ~/bin/
+cd
