@@ -136,6 +136,12 @@ cd ../fastai/courses/dl1/
 ln -s ~/data ./
 cd
 
+# Set up Local file structure
+cd
+mkdir bin tmp scratch projects 
+cd projects
+ln -s ~/data/ .
+
 # Set up emacs
 # May fail...
 git clone https://github.com/prairie-guy/emacs_dotfile.git .emacs.d
@@ -154,10 +160,10 @@ echo "install-gpu.sh: complete"
 
 # Set up ai_utilities
 cd
-mkdir bin
 git clone https://github.com/prairie-guy/ai_utilities.git
 cd ai_utilities
 tar xfvz geckodriver-v0.19.1-linux64.tar.gz
 cp geckodriver ~/bin/
 cd
 pip install selenium
+
