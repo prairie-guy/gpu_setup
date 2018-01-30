@@ -160,3 +160,4 @@ cd ai_utilities
 tar xfvz geckodriver-v0.19.1-linux64.tar.gz
 cp geckodriver ~/bin/
 cd
+pip install selenium
