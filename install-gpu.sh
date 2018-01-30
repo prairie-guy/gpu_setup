@@ -15,9 +15,6 @@ cp authorized_keys ~/.ssh/.
 cp -r dot_files/.* ~/.
 cd
 
-# Set up a project directory
-mkdir projects
-
 # Install
 set -e
 set -o xtrace
