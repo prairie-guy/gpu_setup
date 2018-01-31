@@ -7,18 +7,20 @@
 
 # USE: 1) Install git
 #      2) git clone https://github.com/prairie-guy/gpu_setup.git
-#      3) gpu_setup/install-gpu.sh
-
-# Install personal dotfiles for bash and ssh
-mkdir ~/.ssh
-cp authorized_keys ~/.ssh/.
-cp -r dot_files/.* ~/.
-cd
+#      3) cd gpu_setup
+#      4) ./install-gpu.sh
 
 # Install
 set -e
 set -o xtrace
 DEBIAN_FRONTEND=noninteractive
+
+# Install personal dotfiles for bash and ssh
+rm -fr .ssh downloads data bin tmp scratch projects 
+cp -rf dot_files/.* ~/.
+mkdir ~/.ssh
+cp -fauthorized_keys ~/.ssh/.
+cd
 
 # Ensure system is updated and has basic build tools
 sudo apt-get update
@@ -49,8 +51,8 @@ sudo apt install cuda -y
 
 wget http://files.fast.ai/files/cudnn-9.1-linux-x64-v7.tgz
 tar xf cudnn-9.1-linux-x64-v7.tgz
-sudo cp cuda/include/*.* /usr/local/cuda/include/
-sudo cp cuda/lib64/*.* /usr/local/cuda/lib64/
+sudo cp -f cuda/include/*.* /usr/local/cuda/include/
+sudo cp -f cuda/lib64/*.* /usr/local/cuda/lib64/
 cd
 
 # Install Anaconda and fastai
@@ -160,7 +162,7 @@ cd
 git clone https://github.com/prairie-guy/ai_utilities.git
 cd ai_utilities
 tar xfvz geckodriver-v0.19.1-linux64.tar.gz
-cp geckodriver ~/bin/
+cp -f geckodriver ~/bin/
 cd
 pip install selenium
 
