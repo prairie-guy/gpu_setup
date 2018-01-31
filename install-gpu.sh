@@ -18,9 +18,11 @@ DEBIAN_FRONTEND=noninteractive
 # Install personal dotfiles for bash and ssh
 cd
 rm -fr .ssh downloads data bin tmp scratch projects
-cp -rf ~/gpu_setup/dot_files/.* ~/
-mkdir ~/.ssh
-cp -f ~/gpu_setup/authorized_keys ~/.ssh/.
+mkdir .ssh
+cp gpu_setup/authorized_keys .ssh/.
+cp gpu_setup/dot_files/.bashrc .
+cp gpu_setup/dot_files/.bash_profile .
+cp -r gpu_setup/dot_files/.kaggle-cli/ .
 cd
 
 # Ensure system is updated and has basic build tools
