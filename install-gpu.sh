@@ -19,10 +19,10 @@ DEBIAN_FRONTEND=noninteractive
 cd
 rm -fr .ssh .kaggle-cli downloads data bin tmp scratch projects
 mkdir .ssh
-cp gpu_setup/authorized_keys .ssh/.
-cp gpu_setup/dot_files/.bashrc .
-cp gpu_setup/dot_files/.bash_profile .
-cp -r gpu_setup/dot_files/.kaggle-cli/ .
+cp -f gpu_setup/authorized_keys .ssh/.
+cp -f gpu_setup/dot_files/.bashrc .
+cp -f gpu_setup/dot_files/.bash_profile .
+cp -fr gpu_setup/dot_files/.kaggle-cli/ .
 cd
 
 # Ensure system is updated and has basic build tools
