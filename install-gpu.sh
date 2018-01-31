@@ -16,10 +16,10 @@ set -o xtrace
 DEBIAN_FRONTEND=noninteractive
 
 # Install personal dotfiles for bash and ssh
-rm -fr .ssh downloads data bin tmp scratch projects 
-cp -rf dot_files/.* ~/.
+rm -fr .ssh downloads data bin tmp scratch projects
+cp -rf gpu_setup/dot_files/.* .
 mkdir ~/.ssh
-cp -fauthorized_keys ~/.ssh/.
+cp -f gpu_setup/authorized_keys ~/.ssh/.
 cd
 
 # Ensure system is updated and has basic build tools
