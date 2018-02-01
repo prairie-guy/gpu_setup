@@ -81,8 +81,8 @@ source ~/.bashrc
 cd
 
 ## Install Tensorflow and Keras
-conda install tensorflow-gpu
-conda install keras
+pip install tensorflow-gpu
+pip install keras
 
 ## Jupyter Setup
 jupyter notebook --generate-config
