@@ -43,6 +43,7 @@ sudo apt-get --assume-yes install openssh-server
 sudo apt-get --assume-yes install tmux build-essential gcc g++ make binutils emacs24-nox git zip software-properties-common curl
 
 # Create local download dir
+cd
 mkdir ~/downloads
 
 # Install cuda and cudnn
@@ -52,7 +53,6 @@ sudo dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
 sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
 sudo apt update
 sudo apt install cuda -y
-
 wget http://files.fast.ai/files/cudnn-9.1-linux-x64-v7.tgz
 tar xf cudnn-9.1-linux-x64-v7.tgz
 sudo cp -f cuda/include/*.* /usr/local/cuda/include/
@@ -64,7 +64,6 @@ cd ~/downloads/
 wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
 bash Anaconda3-5.0.1-Linux-x86_64.sh -b
 cd
-
 git clone https://github.com/fastai/fastai.git
 cd fastai/
 echo 'export PYTHONPATH=$PYTHONPATH:~/fastai' >> ~/.bashrc
@@ -80,6 +79,77 @@ echo 'alias fastai-stop="source deactivate"' >> ~/.bashrc
 source activate fastai
 source ~/.bashrc
 cd
+
+# Add specific fast.ai course files
+cd
+mkdir data
+cd data
+wget http://files.fast.ai/data/dogscats.zip
+unzip -q dogscats.zip
+cd ../fastai/courses/dl1/
+ln -s ~/data ./
+cd
+
+# Set up Local file structure
+cd
+mkdir bin tmp scratch projects 
+cd projects
+ln -s ~/data/ .
+
+# Install Julia and setup to work with Juypter
+# EDIT FOR MOST RECENT VERSION OF JULIA
+JULIA_VERSION=julia-0.6.2-linux-x86_64.tar.gz
+cd
+wget https://julialang-s3.julialang.org/bin/linux/x64/0.6/$JULIA_VERSION
+mkdir tmp
+tar xfv $JULIA_VERSION -C tmp
+mv tmp/julia* julia
+rm -fr tmp
+echo 'export PATH="/home/cdaniels/julia/bin:$PATH"'  >> ~/.bashrc
+export PATH="/home/cdaniels/julia/bin:$PATH"
+julia -e 'Pkg.update()'
+julia -e 'Pkg.add("IJulia")'
+cd
+
+# Set up emacs
+cd
+rm -fr ~/.emacs.d
+git clone https://github.com/prairie-guy/emacs_dotfile.git .emacs.d
+cd .emacs.d
+./setup.sh
+cd
+
+# Set up google-cloud-sdk
+cd
+curl https://sdk.cloud.google.com | bash
+echo 'export GOOGLE_APPLICATION_CREDENTIALS=/home/cdaniels/google-cloud-sdk/cbd_auth.json'
+touch ~/google-cloud-sdk/cbd_auth.json
+echo 'NEED TO ADD JSON AUTHENTICATION TO THIS FILE'
+cd
+
+# Set up ai_utilities
+cd
+git clone https://github.com/prairie-guy/ai_utilities.git
+cd ai_utilities
+tar xfvz geckodriver-v0.19.1-linux64.tar.gz
+cp -f geckodriver ~/bin/
+pip install selenium
+cd
+
+# Set up default CUDA gpus
+echo '# Set up default CUDA gpus. Here we assume that gpu=0 is reserved for the display' >> ~/.bashrc
+echo 'export CUDA_DEVICE_ORDER=PCI_BUS_ID' >> ~/.bashrc
+echo 'export CUDA_VISIBLE_DEVICES=1,2' >> ~/.bashrc
+echo 'CUDA_VISIBLE_DEVICES=1,2'
+echo 'CUDA 0 is being reserved for the display'
+echo 'EDIT ~/.bashrc if this needs changing'
+
+# Install Tensorflow and Keras
+conda install tensorflow-gpu
+conds install keras
+
+# Kaggle
+pip install kaggle-cli
 
 ## Jupyter Setup
 jupyter notebook --generate-config
@@ -99,22 +169,6 @@ jupyter nbextension enable --py widgetsnbextension --sys-prefix
 # conda install -c conda-forge jupyter_contrib_nbextensions
 # jupyter contrib nbextension install --user
 
-
-# Install Julia and setup to work with Juypter
-# EDIT FOR MOST RECENT VERSION OF JULIA
-JULIA_VERSION=julia-0.6.2-linux-x86_64.tar.gz
-cd
-wget https://julialang-s3.julialang.org/bin/linux/x64/0.6/$JULIA_VERSION
-mkdir tmp
-tar xfv $JULIA_VERSION -C tmp
-mv tmp/julia* julia
-rm -fr tmp
-echo 'export PATH="/home/cdaniels/julia/bin:$PATH"'  >> ~/.bashrc
-export PATH="/home/cdaniels/julia/bin:$PATH"
-julia -e 'Pkg.update()'
-julia -e 'Pkg.add("IJulia")'
-
-
 # Install Clojure for Juypter
 # !!! Need to install lein first
 # git clone https://github.com/roryk/clojupyter
@@ -122,59 +176,4 @@ julia -e 'Pkg.add("IJulia")'
 # make
 # make install
 
-# Kaggle
-pip install kaggle-cli
-
-# Add specific fast.ai course files
-cd
-mkdir data
-cd data
-wget http://files.fast.ai/data/dogscats.zip
-unzip -q dogscats.zip
-cd ../fastai/courses/dl1/
-ln -s ~/data ./
-cd
-
-# Set up Local file structure
-cd
-mkdir bin tmp scratch projects 
-cd projects
-ln -s ~/data/ .
-
-# Set up emacs
-rm -fr ~/.emacs.d
-git clone https://github.com/prairie-guy/emacs_dotfile.git .emacs.d
-cd .emacs.d
-./setup.sh
-cd
-
-# Set up google-cloud-sdk
-cd
-curl https://sdk.cloud.google.com | bash
-echo 'export GOOGLE_APPLICATION_CREDENTIALS=/home/cdaniels/google-cloud-sdk/cbd_auth.json'
-touch ~/google-cloud-sdk/cbd_auth.json
-echo 'NEED TO ADD JSON AUTHENTICATION TO THIS FILE'
-
 echo "install-gpu.sh: complete"
-
-# Set up ai_utilities
-cd
-git clone https://github.com/prairie-guy/ai_utilities.git
-cd ai_utilities
-tar xfvz geckodriver-v0.19.1-linux64.tar.gz
-cp -f geckodriver ~/bin/
-cd
-pip install selenium
-
-# Set up default CUDA gpus
-echo '# Set up default CUDA gpus. Here we assume that gpu=0 is reserved for the display' >> ~/.bashrc
-echo 'export CUDA_DEVICE_ORDER=PCI_BUS_ID' >> ~/.bashrc
-echo 'export CUDA_VISIBLE_DEVICES=1,2' >> ~/.bashrc
-echo 'CUDA_VISIBLE_DEVICES=1,2'
-echo 'CUDA 0 is being reserved for the display'
-echo 'EDIT ~/.bashrc if this needs changing'
-
-# Install Tensorflow and Keras
-conda install tensorflow-gpu
-conds install keras
-
