@@ -17,7 +17,8 @@ DEBIAN_FRONTEND=noninteractive
 
 # Install personal dotfiles for bash and ssh
 cd
-rm -fr .ssh .emacs.d .kaggle-cli anaconda3 google-cloud-sdk julia fastai ai_utilities downloads data bin tmp scratch projects 
+rm -fr anaconda3 google-cloud-sdk julia fastai ai_utilities downloads data bin tmp scratch projects
+rm -fr .*
 mkdir .ssh
 cp -f gpu_setup/authorized_keys .ssh/.
 cp -f gpu_setup/dot_files/.bashrc .
