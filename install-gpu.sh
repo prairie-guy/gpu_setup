@@ -175,3 +175,6 @@ echo 'export CUDA_VISIBLE_DEVICES=1,2' >> ~/.bashrc
 echo 'CUDA_VISIBLE_DEVICES=1,2'
 echo 'CUDA 0 is being reserved for the display'
 echo 'EDIT ~/.bashrc if this needs changing'
+
+# Restart
+shutdown -r now
