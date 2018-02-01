@@ -57,6 +57,7 @@ sudo cp -f cuda/include/*.* /usr/local/cuda/include/
 sudo cp -f cuda/lib64/*.* /usr/local/cuda/lib64/
 
 # Install Anaconda and fastai
+sudo rm -fr ~/.cache # Hack. Not sure where this comes from, but it screws things up
 cd ~/downloads/
 wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
 bash Anaconda3-5.0.1-Linux-x86_64.sh -b
