@@ -29,7 +29,7 @@ cp -fr gpu_setup/dot_files/.kaggle-cli/ .
 cd
 
 # Ensure system is updated and has basic build tools
-sudo rm /etc/apt/apt.conf.d/*.*
+sudo rm -f /etc/apt/apt.conf.d/*.*
 sudo apt-get update
 sudo apt install unzip -y
 sudo apt -y upgrade --force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
