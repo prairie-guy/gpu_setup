@@ -17,7 +17,7 @@ DEBIAN_FRONTEND=noninteractive
 
 # Install personal dotfiles for bash and ssh
 cd
-rm -fr .ssh .emacs.d .kaggle-cli downloads data bin tmp scratch projects
+rm -fr .ssh .emacs.d .kaggle-cli ai_utilities downloads data bin tmp scratch projects
 mkdir .ssh
 cp -f gpu_setup/authorized_keys .ssh/.
 cp -f gpu_setup/dot_files/.bashrc .
@@ -171,7 +171,7 @@ pip install selenium
 
 # Set up default CUDA gpus
 echo '# Set up default CUDA gpus. Here we assume that gpu=0 is reserved for the display' >> ~/.bashrc
-echo 'export CUDA_VISIBLE_DEVICES=1' >> ~/.bashrc
-echo 'CUDA_VISIBLE_DEVICES=1'
+echo 'export CUDA_VISIBLE_DEVICES=1,2' >> ~/.bashrc
+echo 'CUDA_VISIBLE_DEVICES=1,2'
 echo 'CUDA 0 is being reserved for the display'
 echo 'EDIT ~/.bashrc if this needs changing'
