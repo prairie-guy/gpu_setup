@@ -145,7 +145,7 @@ cd projects
 ln -s ~/data/ .
 
 # Set up emacs
-# May fail...
+rm -fr ~/.emacs.d
 git clone https://github.com/prairie-guy/emacs_dotfile.git .emacs.d
 cd .emacs.d
 ./setup.sh
