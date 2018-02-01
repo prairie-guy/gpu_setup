@@ -91,7 +91,7 @@ echo 'alias fastai-stop="source deactivate"' >> ~/.bashrc
 
 # Set up Local file structure
 cd
-mkdir bin tmp scratch projects 
+mkdir bin scratch projects 
 cd projects
 ln -s ~/data/ .
 
