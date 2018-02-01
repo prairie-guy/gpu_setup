@@ -16,9 +16,9 @@ set -o xtrace
 DEBIAN_FRONTEND=noninteractive
 
 # Install personal dotfiles for bash and ssh
-cd
+cd 
 rm -fr anaconda3 google-cloud-sdk julia fastai ai_utilities downloads data bin tmp scratch projects
-rm -fr .*
+rm -fr .* || true
 mkdir .ssh
 cp -f gpu_setup/authorized_keys .ssh/.
 cp -f gpu_setup/dot_files/.bashrc .
