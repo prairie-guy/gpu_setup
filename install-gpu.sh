@@ -81,10 +81,6 @@ source activate fastai
 source ~/.bashrc
 cd
 
-## Install Tensorflow and Keras
-pip install tensorflow-gpu
-pip install keras
-
 ## Jupyter Setup
 jupyter notebook --generate-config
 jupass=`python -c "from notebook.auth import passwd; print(passwd())"`
@@ -177,5 +173,7 @@ echo 'CUDA_VISIBLE_DEVICES=1,2'
 echo 'CUDA 0 is being reserved for the display'
 echo 'EDIT ~/.bashrc if this needs changing'
 
-# Restart
-shutdown -r now
+# Install Tensorflow and Keras
+pip install tensorflow-gpu
+pip install keras
+
