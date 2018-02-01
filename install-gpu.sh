@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # CBD: Basic Default setup. See: sodium:~/sysadmin/silver/setup_gpu/install-gpu.sh
 # See: Modified from http://files.fast.ai/setup/paperspace
 #
@@ -27,6 +29,7 @@ cp -fr gpu_setup/dot_files/.kaggle-cli/ .
 cd
 
 # Ensure system is updated and has basic build tools
+sudo rm /etc/apt/apt.conf.d/*.*
 sudo apt-get update
 sudo apt install unzip -y
 sudo apt -y upgrade --force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
@@ -36,16 +39,11 @@ sudo apt update
 sudo apt-get --assume-yes upgrade
 sudo apt -y autoremove
 
-# Install openssh-server
-sudo apt-get --assume-yes install openssh-server
+# Install key packages openssh-server
+sudo apt-get --assume-yes install openssh-server tmux build-essential gcc g++ make binutils emacs24-nox git zip software-properties-common curl
 
-# Add some key packages
-sudo apt-get --assume-yes install tmux build-essential gcc g++ make binutils emacs24-nox git zip software-properties-common curl
-
-# Create local download dir
 cd
 mkdir ~/downloads
-
 # Install cuda and cudnn
 cd ~/downloads/
 wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
@@ -57,7 +55,6 @@ wget http://files.fast.ai/files/cudnn-9.1-linux-x64-v7.tgz
 tar xf cudnn-9.1-linux-x64-v7.tgz
 sudo cp -f cuda/include/*.* /usr/local/cuda/include/
 sudo cp -f cuda/lib64/*.* /usr/local/cuda/lib64/
-cd
 
 # Install Anaconda and fastai
 cd ~/downloads/
@@ -66,19 +63,14 @@ bash Anaconda3-5.0.1-Linux-x86_64.sh -b
 cd
 git clone https://github.com/fastai/fastai.git
 cd fastai/
-echo 'export PYTHONPATH=$PYTHONPATH:~/fastai' >> ~/.bashrc
-export PYTHONPATH=$PYTHONPATH:~/fastai
 echo 'export PATH=~/anaconda3/bin:$PATH' >> ~/.bashrc
 export PATH=~/anaconda3/bin:$PATH
 source ~/.bashrc
 conda env update
 echo 'source activate fastai' >> ~/.bashrc
-echo 'alias fastai-start="source deactivate; source activate fastai"' >> ~/.bashrc
-echo 'alias fastai-stop="source deactivate"' >> ~/.bashrc
-
 source activate fastai
 source ~/.bashrc
-cd
+cd ..
 
 # Add specific fast.ai course files
 cd
@@ -89,6 +81,12 @@ unzip -q dogscats.zip
 cd ../fastai/courses/dl1/
 ln -s ~/data ./
 cd
+
+# Tweaks for fast.ai
+echo 'export PYTHONPATH=$PYTHONPATH:~/fastai' >> ~/.bashrc
+export PYTHONPATH=$PYTHONPATH:~/fastai
+echo 'alias fastai-start="source deactivate; source activate fastai"' >> ~/.bashrc
+echo 'alias fastai-stop="source deactivate"' >> ~/.bashrc
 
 # Set up Local file structure
 cd
@@ -146,7 +144,7 @@ echo 'EDIT ~/.bashrc if this needs changing'
 
 # Install Tensorflow and Keras
 conda install tensorflow-gpu
-conds install keras
+conda install keras
 
 # Kaggle
 pip install kaggle-cli
