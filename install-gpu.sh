@@ -123,6 +123,11 @@ cd .emacs.d
 ./setup.sh
 cd
 
+# Add favorite pip packages
+# Great for functional program style
+# I like: import funcy as fn
+pip install funcy
+
 # Set up google-cloud-sdk
 cd
 curl https://sdk.cloud.google.com | bash
