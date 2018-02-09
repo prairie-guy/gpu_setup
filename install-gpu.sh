@@ -40,7 +40,7 @@ sudo apt-get --assume-yes upgrade
 sudo apt -y autoremove
 
 # Install key packages openssh-server
-sudo apt-get --assume-yes install openssh-server tmux build-essential gcc g++ make binutils emacs24-nox git zip software-properties-common curl
+sudo apt-get --assume-yes install openssh-server tmux build-essential gcc g++ make binutils git zip software-properties-common curl
 
 cd
 mkdir ~/downloads
@@ -111,6 +111,11 @@ julia -e 'Pkg.add("IJulia")'
 cd
 
 # Set up emacs
+# emacs 25 is not part of Ubuntu 16.04, so need to add repository
+# edit .emacs.d/init.el to uncomment ess to speed up emacs if clojure or julia are not needed
+sudo add-apt-repository ppa:kelleyk/emacs
+sudo apt update
+sudo apt install emacs25-nox
 cd
 rm -fr ~/.emacs.d
 git clone https://github.com/prairie-guy/emacs_dotfile.git .emacs.d
