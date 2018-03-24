@@ -136,15 +136,6 @@ touch ~/google-cloud-sdk/cbd_auth.json
 echo 'NEED TO ADD JSON AUTHENTICATION TO THIS FILE'
 cd
 
-# Set up ai_utilities
-cd
-git clone https://github.com/prairie-guy/ai_utilities.git
-cd ai_utilities
-tar xfvz geckodriver-v0.19.1-linux64.tar.gz
-cp -f geckodriver ~/bin/
-pip install selenium
-cd
-
 # Set up default CUDA gpus
 echo '# Set up default CUDA gpus. Here we assume that gpu=0 is reserved for the display' >> ~/.bashrc
 echo 'export CUDA_DEVICE_ORDER=PCI_BUS_ID' >> ~/.bashrc
@@ -160,6 +151,16 @@ conda install keras
 # Kaggle
 pip install kaggle-cli
 
+# Set up ai_utilities
+cd
+git clone https://github.com/prairie-guy/ai_utilities.git
+cd ai_utilities
+tar xfvz geckodriver-v0.19.1-linux64.tar.gz
+cp -f geckodriver ~/bin/
+pip install selenium
+export PYTHONPATH=$PYTHONPATH:~/ai_utilities
+cd
+
 ## Jupyter Setup
 jupyter notebook --generate-config
 jupass=`python -c "from notebook.auth import passwd; print(passwd())"`
@@ -170,19 +171,5 @@ echo "c.NotebookApp.open_browser = False" >> ~/.jupyter/jupyter_notebook_config.
 # Add Jupyter Notebook Extensions, most importantly "Select CodeMirror Keymap" allows for emacs mode.
 pip install ipywidgets
 jupyter nbextension enable --py widgetsnbextension --sys-prefix
-
-# Add Jupyter Notebook Extensions, most importantly "Select CodeMirror Keymap" allows for emacs mode.
-# !!! Buggy within fasti environment
-# !!! Hand install
-# pip install jupyter_contrib_nbextensions
-# conda install -c conda-forge jupyter_contrib_nbextensions
-# jupyter contrib nbextension install --user
-
-# Install Clojure for Juypter
-# !!! Need to install lein first
-# git clone https://github.com/roryk/clojupyter
-# cd clojupyter
-# make
-# make install
 
 echo "install-gpu.sh: complete"
