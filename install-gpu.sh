@@ -158,6 +158,7 @@ cd ai_utilities
 tar xfvz geckodriver-v0.19.1-linux64.tar.gz
 cp -f geckodriver ~/bin/
 pip install selenium
+echo 'export PYTHONPATH=$PYTHONPATH:~/ai_utilities' >> ~/.bashrc
 export PYTHONPATH=$PYTHONPATH:~/ai_utilities
 cd
 
