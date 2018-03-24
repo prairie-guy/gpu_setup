@@ -7,7 +7,7 @@
 # Install a generally useful environment
 # This script is designed to work with ubuntu 16.04 LTS
 
-# USE: 1) Install git
+# USE: 1) apt-get install git
 #      2) git clone https://github.com/prairie-guy/gpu_setup.git
 #      3) cd gpu_setup
 #      4) ./install-gpu.sh
