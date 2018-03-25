@@ -87,13 +87,14 @@ cd
 echo 'export PYTHONPATH=$PYTHONPATH:~/fastai' >> ~/.bashrc
 export PYTHONPATH=$PYTHONPATH:~/fastai
 echo 'alias fastai-start="source deactivate; source activate fastai"' >> ~/.bashrc
-echo 'alias fastai-stop="source deactivate"' >> ~/.bashrc
+echo alias fastai-stop=source deactivate >> ~/.bashrc
 
 # Set up Local file structure
 cd
 mkdir bin scratch projects 
 cd projects
 ln -s ~/data/ .
+ln -s ~/fastai/courses/dl1/images/ .
 
 # Install Julia and setup to work with Juypter
 # EDIT FOR MOST RECENT VERSION OF JULIA
@@ -158,8 +159,6 @@ cd ai_utilities
 tar xfvz geckodriver-v0.19.1-linux64.tar.gz
 cp -f geckodriver ~/bin/
 pip install selenium
-echo 'export PYTHONPATH=$PYTHONPATH:~/ai_utilities' >> ~/.bashrc
-export PYTHONPATH=$PYTHONPATH:~/ai_utilities
 cd
 
 ## Jupyter Setup
