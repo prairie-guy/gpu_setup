@@ -141,6 +141,8 @@ cd
 echo '# Set up default CUDA gpus. Here we assume that gpu=0 is reserved for the display' >> ~/.bashrc
 echo 'export CUDA_DEVICE_ORDER=PCI_BUS_ID' >> ~/.bashrc
 echo 'export CUDA_VISIBLE_DEVICES=1,2' >> ~/.bashrc
+echo 'nvidia-smi -pm ENABLED &> /dev/null' >> ~/.bashrc
+echo 'nvidia-smi -ac 850,1912 &> /dev/null' >> ~/.bashrc
 echo 'CUDA_VISIBLE_DEVICES=1,2'
 echo 'CUDA 0 is being reserved for the display'
 echo 'EDIT ~/.bashrc if this needs changing'
