@@ -25,7 +25,6 @@ mkdir .ssh
 cp -f gpu_setup/authorized_keys .ssh/.
 cp -f gpu_setup/dot_files/.bashrc .
 cp -f gpu_setup/dot_files/.bash_profile .
-cp -fr gpu_setup/dot_files/.kaggle-cli/ .
 cd
 
 # Ensure system is updated and has basic build tools
@@ -152,7 +151,7 @@ conda install tensorflow-gpu
 conda install keras
 
 # Kaggle
-pip install kaggle-cli
+pip install kaggle
 
 # Set up ai_utilities
 cd
