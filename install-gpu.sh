@@ -32,7 +32,7 @@ sudo rm -f /etc/apt/apt.conf.d/*.*
 sudo apt-get update
 sudo apt install unzip -y
 sudo apt -y upgrade --force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
-sudo apt -y install --force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" qtdeclarative5-dev qml-module-qtquick-controls
+sudo apt -y install --force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::=--force-confold qtdeclarative5-dev qml-module-qtquick-controls
 sudo add-apt-repository ppa:graphics-drivers/ppa -y
 sudo apt update
 sudo apt-get --assume-yes upgrade
@@ -63,11 +63,11 @@ bash Anaconda3-5.0.1-Linux-x86_64.sh -b
 cd
 git clone https://github.com/fastai/fastai.git
 cd fastai/
-echo 'export PATH=~/anaconda3/bin:$PATH' >> ~/.bashrc
+echo export PATH=~/anaconda3/bin:$PATH >> ~/.bashrc
 export PATH=~/anaconda3/bin:$PATH
 source ~/.bashrc
 conda env update
-echo 'source activate fastai' >> ~/.bashrc
+echo source activate fastai >> ~/.bashrc
 source activate fastai
 source ~/.bashrc
 cd ..
@@ -83,9 +83,9 @@ ln -s ~/data ./
 cd
 
 # Tweaks for fast.ai
-echo 'export PYTHONPATH=$PYTHONPATH:~/fastai' >> ~/.bashrc
+echo export PYTHONPATH=$PYTHONPATH:~/fastai >> ~/.bashrc
 export PYTHONPATH=$PYTHONPATH:~/fastai
-echo 'alias fastai-start="source deactivate; source activate fastai"' >> ~/.bashrc
+echo alias fastai-start=source deactivate; source activate fastai >> ~/.bashrc
 echo alias fastai-stop=source deactivate >> ~/.bashrc
 
 # Set up Local file structure
@@ -97,9 +97,9 @@ ln -s ~/fastai/courses/dl1/images/ .
 
 # Install Julia and setup to work with Juypter
 # EDIT FOR MOST RECENT VERSION OF JULIA
-JULIA_VERSION=julia-0.6.2-linux-x86_64.tar.gz
+JULIA_VERSION=julia-1.0.1-linux-x86_64.tar.gz
 cd
-wget https://julialang-s3.julialang.org/bin/linux/x64/0.6/$JULIA_VERSION
+wget https://julialang-s3.julialang.org/bin/linux/x64/1.0/$JULIA_VERSION
 mkdir tmp
 tar xfv $JULIA_VERSION -C tmp
 mv tmp/julia* julia
