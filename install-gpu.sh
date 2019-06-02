@@ -168,6 +168,7 @@ jupass=`python -c "from notebook.auth import passwd; print(passwd())"`
 echo "c.NotebookApp.password = u'"$jupass"'" >> ~/.jupyter/jupyter_notebook_config.py
 echo "c.NotebookApp.ip = '*'" >> ~/.jupyter/jupyter_notebook_config.py
 echo "c.NotebookApp.open_browser = False" >> ~/.jupyter/jupyter_notebook_config.py
+echo "c.NotebookApp.allow_remote_access = True" >> ~/.jupyter/jupyter_notebook_config.py
 
 # Add Jupyter Notebook Extensions, most importantly "Select CodeMirror Keymap" allows for emacs mode.
 pip install ipywidgets
