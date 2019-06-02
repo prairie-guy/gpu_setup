@@ -162,6 +162,9 @@ cp -f geckodriver ~/bin/
 pip install selenium
 cd
 
+## Add R
+conda install -c r r-essentials
+
 ## Jupyter Setup
 jupyter notebook --generate-config
 jupass=`python -c "from notebook.auth import passwd; print(passwd())"`
