@@ -165,6 +165,13 @@ cd
 ## Add R
 conda install -c r r-essentials
 
+## Add Clojure
+CLOJURE_VERSION=linux-install-1.10.0.442.sh
+curl -O https://download.clojure.org/install/$CLOJURE_VERSION
+chmod +x $CLOJURE_VERSION
+sudo ./$CLOJURE_VERSION
+rm -f $CLOJURE_VERSION
+
 ## Jupyter Setup
 jupyter notebook --generate-config
 jupass=`python -c "from notebook.auth import passwd; print(passwd())"`
