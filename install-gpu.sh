@@ -18,7 +18,7 @@ set -o xtrace
 DEBIAN_FRONTEND=noninteractive
 
 # Install personal dotfiles for bash and ssh
-cd 
+cd
 rm -fr anaconda3 google-cloud-sdk julia fastai ai_utilities downloads data bin tmp scratch projects
 rm -fr .emacs.d .ssh .julia .ipython .conda .cache .keras .keras .mozilla .torch .cache
 mkdir .ssh
@@ -27,7 +27,7 @@ cp -f gpu_setup/dot_files/.bashrc .
 cp -f gpu_setup/dot_files/.bash_profile .
 cd
 
-# Ensure system is updated and has basic build tools
+# Update basic build tools
 sudo rm -f /etc/apt/apt.conf.d/*.*
 sudo apt-get update
 sudo apt install unzip -y
@@ -41,8 +41,10 @@ sudo apt -y autoremove
 # Install key packages openssh-server
 sudo apt-get --assume-yes install openssh-server tmux build-essential gcc g++ make binutils git zip software-properties-common curl
 
+# Set up Local file structure
 cd
-mkdir ~/downloads
+mkdir bin scratch downloads
+
 # Install cuda and cudnn
 cd ~/downloads/
 wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
@@ -55,60 +57,15 @@ tar xf cudnn-9.1-linux-x64-v7.tgz
 sudo cp -f cuda/include/*.* /usr/local/cuda/include/
 sudo cp -f cuda/lib64/*.* /usr/local/cuda/lib64/
 
-# Install Anaconda and fastai
-sudo rm -fr ~/.cache # Hack. Not sure where this comes from, but it screws things up
-cd ~/downloads/
-wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
-bash Anaconda3-5.0.1-Linux-x86_64.sh -b
-cd
-git clone https://github.com/fastai/fastai.git
-cd fastai/
-echo export PATH=~/anaconda3/bin:$PATH >> ~/.bashrc
-export PATH=~/anaconda3/bin:$PATH
-source ~/.bashrc
-conda env update
-echo source activate fastai >> ~/.bashrc
-source activate fastai
-source ~/.bashrc
-cd ..
-
-# Add specific fast.ai course files
-cd
-mkdir data
-cd data
-wget http://files.fast.ai/data/dogscats.zip
-unzip -q dogscats.zip
-cd ../fastai/courses/dl1/
-ln -s ~/data ./
-cd
-
-# Tweaks for fast.ai
-echo export PYTHONPATH=$PYTHONPATH:~/fastai >> ~/.bashrc
-export PYTHONPATH=$PYTHONPATH:~/fastai
-echo alias fastai-start=source deactivate; source activate fastai >> ~/.bashrc
-echo alias fastai-stop=source deactivate >> ~/.bashrc
-
-# Set up Local file structure
-cd
-mkdir bin scratch projects 
-cd projects
-ln -s ~/data/ .
-ln -s ~/fastai/courses/dl1/images/ .
-
-# Install Julia and setup to work with Juypter
-# EDIT FOR MOST RECENT VERSION OF JULIA
-JULIA_VERSION=julia-1.0.1-linux-x86_64.tar.gz
-cd
-wget https://julialang-s3.julialang.org/bin/linux/x64/1.0/$JULIA_VERSION
-mkdir tmp
-tar xfv $JULIA_VERSION -C tmp
-mv tmp/julia* julia
-rm -fr tmp
-echo 'export PATH="/home/cdaniels/julia/bin:$PATH"'  >> ~/.bashrc
-export PATH="/home/cdaniels/julia/bin:$PATH"
-julia -e 'Pkg.update()'
-julia -e 'Pkg.add("IJulia")'
-cd
+# Set up default CUDA gpus
+echo '# Set up default CUDA gpus. Here we assume that gpu=0 is reserved for the display' >> ~/.bashrc
+echo 'export CUDA_DEVICE_ORDER=PCI_BUS_ID' >> ~/.bashrc
+echo 'export CUDA_VISIBLE_DEVICES=1,2' >> ~/.bashrc
+echo 'nvidia-smi -pm ENABLED &> /dev/null' >> ~/.bashrc
+echo 'nvidia-smi -ac 850,1912 &> /dev/null' >> ~/.bashrc
+echo 'CUDA_VISIBLE_DEVICES=1,2'
+echo 'CUDA 0 is being reserved for the display'
+echo 'EDIT ~/.bashrc if this needs changing'
 
 # Set up emacs
 # emacs 25 is not part of Ubuntu 16.04, so need to add repository
@@ -123,47 +80,22 @@ cd .emacs.d
 ./setup.sh
 cd
 
-# Add favorite pip packages
-# Great for functional program style
-# I like: import funcy as fn
-pip install funcy
+# Add other personal apt packages
+sudo apt-get install joe jpeginfo
 
-# Set up google-cloud-sdk
+## Install Julia 
+JULIA_VERSION='julia-1.1.1-linux-x86_64.tar.gz'
+cd ~
+wget https://julialang-s3.julialang.org/bin/linux/x64/1.1/$JULIA_VERSION
+mkdir tmp
+tar xfv $JULIA_VERSION -C tmp
+mv tmp/julia* julia
+rm -fr tmp
+echo 'export PATH="/home/cdaniels/julia/bin:$PATH"'  >> ~/.bashrc
+export PATH="/home/cdaniels/julia/bin:$PATH"
+julia -e 'Pkg.update()'
+julia -e 'Pkg.add("IJulia")'
 cd
-curl https://sdk.cloud.google.com | bash
-echo 'export GOOGLE_APPLICATION_CREDENTIALS=/home/cdaniels/google-cloud-sdk/cbd_auth.json'
-touch ~/google-cloud-sdk/cbd_auth.json
-echo 'NEED TO ADD JSON AUTHENTICATION TO THIS FILE'
-cd
-
-# Set up default CUDA gpus
-echo '# Set up default CUDA gpus. Here we assume that gpu=0 is reserved for the display' >> ~/.bashrc
-echo 'export CUDA_DEVICE_ORDER=PCI_BUS_ID' >> ~/.bashrc
-echo 'export CUDA_VISIBLE_DEVICES=1,2' >> ~/.bashrc
-echo 'nvidia-smi -pm ENABLED &> /dev/null' >> ~/.bashrc
-echo 'nvidia-smi -ac 850,1912 &> /dev/null' >> ~/.bashrc
-echo 'CUDA_VISIBLE_DEVICES=1,2'
-echo 'CUDA 0 is being reserved for the display'
-echo 'EDIT ~/.bashrc if this needs changing'
-
-# Install Tensorflow and Keras
-conda install tensorflow-gpu
-conda install keras
-
-# Kaggle
-pip install kaggle
-
-# Set up ai_utilities
-cd
-git clone https://github.com/prairie-guy/ai_utilities.git
-cd ai_utilities
-tar xfvz geckodriver-v0.19.1-linux64.tar.gz
-cp -f geckodriver ~/bin/
-pip install selenium
-cd
-
-## Add R
-conda install -c r r-essentials
 
 ## Add Clojure
 CLOJURE_VERSION=linux-install-1.10.0.442.sh
@@ -172,7 +104,20 @@ chmod +x $CLOJURE_VERSION
 sudo ./$CLOJURE_VERSION
 rm -f $CLOJURE_VERSION
 
-## Jupyter Setup
+## Add Anaconda
+cd ~
+ANACONDA_VERSION='Anaconda3-2019.03-Linux-x86_64.sh'
+sudo rm -fr ~/.cache # Hack. Not sure where this comes from, but it screws things up
+cd ~/downloads/
+wget https://repo.continuum.io/archive/$ANACONDA_VERSION
+bash $ANACONDA_VERSION -b
+cd
+echo export PATH=~/anaconda3/bin:$PATH >> ~/.bashrc
+export PATH=~/anaconda3/bin:$PATH
+source ~/.bashrc
+conda init bash
+
+## Setup Jupyter Notebook Configuration
 jupyter notebook --generate-config
 jupass=`python -c "from notebook.auth import passwd; print(passwd())"`
 echo "c.NotebookApp.password = u'"$jupass"'" >> ~/.jupyter/jupyter_notebook_config.py
@@ -184,4 +129,36 @@ echo "c.NotebookApp.allow_remote_access = True" >> ~/.jupyter/jupyter_notebook_c
 pip install ipywidgets
 jupyter nbextension enable --py widgetsnbextension --sys-prefix
 
-echo "install-gpu.sh: complete"
+# Add Pip packages
+# Great for functional program style
+# I like: import funcy as fn
+pip install funcy
+
+# Create a conda env for fastai
+# NOTE: THIS MUST BE SET BEFORE DOWNLOADING INTO fastai env
+conda create -n fastai python=3.6
+conda init bash
+echo conda activate fastai >> .bashrc
+
+echo Sever Installed.
+echo *** LOGOUT OF SHELL ***
+echo *** LOGOUT OF SHELL ***
+echo *** Logout of shell for rest of of fastai install . . .
+exit
+
+# CRITICAL THAT WE RELOAD SHELL AFTER THIS FOR CONDA TO WORK
+
+##############
+## Next Install fastai: fastai_setup.sh
+################
+
+
+# Set up google-cloud-sdk
+# cd
+# curl https://sdk.cloud.google.com | bash
+# echo 'export GOOGLE_APPLICATION_CREDENTIALS=/home/cdaniels/google-cloud-sdk/cbd_auth.json'
+# touch ~/google-cloud-sdk/cbd_auth.json
+# echo 'NEED TO ADD JSON AUTHENTICATION TO THIS FILE'
+# cd
+
+# echo "install-gpu.sh: complete"
