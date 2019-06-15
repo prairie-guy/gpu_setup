@@ -52,10 +52,13 @@ sudo dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
 sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
 sudo apt update
 sudo apt install cuda -y
-wget http://files.fast.ai/files/cudnn-9.1-linux-x64-v7.tgz
-tar xf cudnn-9.1-linux-x64-v7.tgz
-sudo cp -f cuda/include/*.* /usr/local/cuda/include/
-sudo cp -f cuda/lib64/*.* /usr/local/cuda/lib64/
+## cudnn is now loaded with conda cudatookkit=10.0
+## cudnn at system level is probably not needed.
+## If so, do the following;
+# wget http://files.fast.ai/files/cudnn-9.1-linux-x64-v7.tgz
+# tar xf cudnn-9.1-linux-x64-v7.tgz
+# sudo cp -f cuda/include/*.* /usr/local/cuda/include/
+# sudo cp -f cuda/lib64/*.* /usr/local/cuda/lib64/
 
 # Set up default CUDA gpus
 echo '# Set up default CUDA gpus. Here we assume that gpu=0 is reserved for the display' >> ~/.bashrc
@@ -146,13 +149,6 @@ echo *** LOGOUT OF SHELL ***
 echo *** Logout of shell for rest of of fastai install . . .
 exit
 
-# CRITICAL THAT WE RELOAD SHELL AFTER THIS FOR CONDA TO WORK
-
-##############
-## Next Install fastai: fastai_setup.sh
-################
-
-
 # Set up google-cloud-sdk
 # cd
 # curl https://sdk.cloud.google.com | bash
@@ -161,4 +157,10 @@ exit
 # echo 'NEED TO ADD JSON AUTHENTICATION TO THIS FILE'
 # cd
 
-# echo "install-gpu.sh: complete"
+######################################################################
+## CRITICAL THAT WE RELOAD SHELL AFTER THIS FOR CONDA TO WORK       ## 
+## Next Install fastai: fastai_setup.sh                             ##
+######################################################################
+
+
+echo "install-gpu.sh: complete"

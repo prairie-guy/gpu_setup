@@ -23,16 +23,11 @@ export PYTHONPATH=$PYTHONPATH:~/fastai
 # Install fast.ai (cuda90 module is tied to version of Linux version of cuda-repo-ubuntu1604_9.0.176-1_amd64.deb)
 cd
 git clone https://github.com/fastai/fastai.git
-conda install -c pytorch -c fastai fastai pytorch torchvision cudatoolkit=9.0
+conda install -c pytorch -c fastai fastai pytorch torchvision cudatoolkit=10.0
 
 ## Optimize (Note pillow-simd is testing)
 conda uninstall -y --force pillow libjpeg-turbo
 conda install -c fastai/label/test pillow-simd
-
-## Check Status of Optimizations
-python -c "import fastai.utils; fastai.utils.check_perf()"
-python -c "from PIL import Image; print(Image.PILLOW_VERSION)"
-python -c "from PIL import features; print(features.check_feature('libjpeg_turbo'))"
 
 ## Install course-v3
 cd
@@ -60,10 +55,17 @@ git clone https://github.com/prairie-guy/ai_utilities.git
 cd ai_utilities
 tar xfvz geckodriver-v0.24.0-linux64.tar.gz
 cp -f geckodriver ~/bin/
-pip install selenium
 cd
 
+## Check Status of Optimizations
+python -c "import fastai.utils; fastai.utils.check_perf()"
+python -c "from PIL import Image; print(Image.PILLOW_VERSION)"
+python -c "from PIL import features; print(features.check_feature('libjpeg_turbo'))"
+
+#conda install -c conda-forge jupyter_contrib_nbextensions
+python -c 'import fastai.utils; fastai.utils.show_install(1)'
+
 ## Might as well install R
-# conda install -c r r-essentials
+conda install -c r r-essentials
 
 echo "Sucess: fastai_setup.sh installed"
