@@ -6,9 +6,9 @@
 ## ``conda create -n fastai python=3.6``
 ## SHOULD BE IN FASTAI ENV BEFORE RUNNING SCRIPT!!!
 
-if [ `env|grep CONDA_DEFAULT|grep fastai` ] ; 
-	then echo env=fastai; 
-	else echo conda is not env=fastai, exiting...; exit;
+if  `env|grep CONDA_DEFAULT|grep fastai`  ; 
+then echo env=fastai; 
+else echo conda is not env=fastai, exiting...; exit;
 fi
 
 cd
@@ -19,8 +19,12 @@ cd
 echo export PYTHONPATH=$PYTHONPATH:~/fastai >> ~/.bashrc
 export PYTHONPATH=$PYTHONPATH:~/fastai
 
+## Early Installs - To avoid problems with Pillow
+conda install -c hellock icrawler
+pip install python-magic
+
 ## Install fast.ai
-# Install fast.ai (cuda90 module is tied to version of Linux version of cuda-repo-ubuntu1604_9.0.176-1_amd64.deb)
+# Install fast.ai cuda90 module is tied to version of Linux version of cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
 cd
 git clone https://github.com/fastai/fastai.git
 conda install -c pytorch -c fastai fastai pytorch torchvision cudatoolkit=10.0
@@ -28,6 +32,9 @@ conda install -c pytorch -c fastai fastai pytorch torchvision cudatoolkit=10.0
 ## Optimize (Note pillow-simd is testing)
 conda uninstall -y --force pillow libjpeg-turbo
 conda install -c fastai/label/test pillow-simd
+
+## Late Installs
+conda install ipython
 
 ## Install course-v3
 cd
@@ -50,11 +57,8 @@ pip install kaggle
 
 ## Set up ai_utilities
 cd
-conda install selenium
 git clone https://github.com/prairie-guy/ai_utilities.git
 cd ai_utilities
-tar xfvz geckodriver-v0.24.0-linux64.tar.gz
-cp -f geckodriver ~/bin/
 cd
 
 ## Check Status of Optimizations
