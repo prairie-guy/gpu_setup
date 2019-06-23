@@ -38,8 +38,8 @@ sudo apt update
 sudo apt-get --assume-yes upgrade
 sudo apt -y autoremove
 
-# Install key packages openssh-server
-sudo apt-get --assume-yes install openssh-server tmux build-essential gcc g++ make binutils git zip software-properties-common curl
+# Install key packages, including  openssh-server
+sudo apt-get --assume-yes install openssh-server tmux build-essential gcc g++ make binutils git zip software-properties-common curl mosh
 
 # Set up Local file structure
 cd
