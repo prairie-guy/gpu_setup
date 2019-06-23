@@ -6,7 +6,7 @@
 ## ``conda create -n fastai python=3.6``
 ## SHOULD BE IN FASTAI ENV BEFORE RUNNING SCRIPT!!!
 
-if  `env|grep CONDA_DEFAULT|grep fastai`  ; 
+if  env|grep CONDA_DEFAULT|grep fastai  ; 
 then echo env=fastai; 
 else echo conda is not env=fastai, exiting...; exit;
 fi
