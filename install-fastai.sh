@@ -35,6 +35,9 @@ conda uninstall --force jpeg libtiff -y
 conda install -c conda-forge libjpeg-turbo
 CC="cc -mavx2" pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd
 
+conda uninstall -y --force pillow libjpeg-turbo
+conda install -c fastai/label/test pillow-simd
+
 ## Late Installs
 conda install scikit-learn 
 conda install ipython

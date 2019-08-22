@@ -13,9 +13,14 @@ pip install python-magic
 
 # Quick and Dirty fastai express install. NOT a replacment for: install-fastai.sh 
 cd
-conda install -c pytorch -c fastai fastai pytorch torchvision cudatoolkit=10.0
+conda install -c pytorch -c fastai fastai
 
-## Optimize (Note pillow-simd is testing)
+## Optimize (libjpeg-turbo and pillow-simd will be installed)
+## NOTE libtiff will not be reinstalled
+conda uninstall --force jpeg libtiff -y
+conda install -c conda-forge libjpeg-turbo
+CC="cc -mavx2" pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd
+
 conda uninstall -y --force pillow libjpeg-turbo
 conda install -c fastai/label/test pillow-simd
 
@@ -24,6 +29,7 @@ conda install jupyter notebook
 conda install -c conda-forge jupyter_contrib_nbextensions
 
 ## Late Installs
+conda install scikit-learn 
 conda install ipython
 
 ## This was installed in gpu_install.sh
