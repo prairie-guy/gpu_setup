@@ -2,8 +2,10 @@
 
 ## 2nd Part of gpu_setup
 ## Install fastai library, course and conda requirements
+## To delete previous fastai, use:
+## `conda remove --name fastai --all`
 ## Make sure your have previously installed fastai env with:
-## ``conda create -n fastai python=3.6``
+## `conda create -n fastai python=3.6`
 ## SHOULD BE IN FASTAI ENV BEFORE RUNNING SCRIPT!!!
 
 if  env|grep CONDA_DEFAULT|grep fastai  ; 
