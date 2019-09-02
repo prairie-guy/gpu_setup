@@ -29,7 +29,7 @@ pip install python-magic
 # Install fast.ai cuda90 module is tied to version of Linux version of cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
 cd
 git clone https://github.com/fastai/fastai.git
-conda install -c pytorch -c fastai fastai
+conda install -c fastai -c pytorch fastai pytorch
 
 ## Optimize (libjpeg-turbo and pillow-simd will be installed)
 ## NOTE libtiff will not be reinstalled
@@ -78,6 +78,6 @@ python -c "from PIL import features; print(features.check_feature('libjpeg_turbo
 python -c 'import fastai.utils; fastai.utils.show_install(1)'
 
 ## Might as well install R
-conda install -c r r-essentials
+# conda install -c r r-essentials
 
 echo "Sucess: fastai_setup.sh installed"
