@@ -87,7 +87,9 @@ cd
 sudo apt-get install joe jpeginfo
 
 ## Install Julia 
-JULIA_VERSION='julia-1.1.1-linux-x86_64.tar.gz'
+JULIA_VERSION='julia-1.4.1-linux-x86_64.tar.gz'
+JULIA_V='1.4'
+wget https://julialang-s3.julialang.org/bin/linux/x64/$JULIA_V/$JULIA_VERSION
 cd ~
 wget https://julialang-s3.julialang.org/bin/linux/x64/1.1/$JULIA_VERSION
 mkdir tmp

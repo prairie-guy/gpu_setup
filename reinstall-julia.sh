@@ -19,8 +19,9 @@ DEBIAN_FRONTEND=noninteractive
 
 ## Install Julia 
 cd
-JULIA_VERSION='julia-1.1.1-linux-x86_64.tar.gz'
-wget https://julialang-s3.julialang.org/bin/linux/x64/1.1/$JULIA_VERSION
+JULIA_VERSION='julia-1.4.1-linux-x86_64.tar.gz'
+JULIA_V='1.4'
+wget https://julialang-s3.julialang.org/bin/linux/x64/$JULIA_V/$JULIA_VERSION
 mkdir tmp
 tar xfv $JULIA_VERSION -C tmp
 mv tmp/julia* julia
