@@ -9,7 +9,7 @@ Be sure to install in this order. Anaconda is loaded in `install-gpu.sh` and set
 
 
 ## scratch_setup
-#### Used to setup a client on a third-party without root access
+#### Used to setup a client on a third-party server without root access
 Includes installation of Anaconda, Juypter and Julia. A conda user environment is created. Homebrew for linux is also available for installation, but the script needs to be modified to allow it to proceed. (This is to avoid potential collision between conda and homebrew)
 
 conda-forge is used to install emacs, tmux and mosh. emacs.d is then configured with a configuration by prairie-guy.
