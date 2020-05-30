@@ -18,6 +18,6 @@ conda-forge is used to install emacs, tmux and mosh. emacs.d is then configured 
 - `install-scratch-2.sh` installs Jupyter and the remaining programs. Modify the script to allow homebrew to be installed.
 - `msh_up` is a simple script to launch a mosh-server locally. This is a hack to allow emacs to work properly when using the excellent Blink app to access a server in which the UDP ports have not been opened up in the firewall.
 
-Be sure to install in this order. Anaconda is loaded in `install-scratchj-1.sh` and sets up the `scratch` conda env. Before using `install-scratch-2.sh`, be sure that `conda activate fastai` has been executed so as to be in the correct environment.
+Be sure to install in this order. Anaconda is loaded in `install-scratch-1.sh` and sets up the `scratch` conda env. Before using `install-scratch-2.sh`, be sure that `conda activate fastai` has been executed so as to be in the correct environment.
 
 
