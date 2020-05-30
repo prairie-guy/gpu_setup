@@ -34,16 +34,12 @@ JULIA_V='1.4'
 ## Anaconda
 ANACONDA_VERSION='Anaconda3-2020.02-Linux-x86_64.sh'
 #
-## Conda
-conda_env=scratch
-python_ver="3.7"
-#
 ######################################################
 
 # Clean up in case this is a reinstall
 cd ~
 rm -fr anaconda3 julia downloads data bin tmp scratch projects
-rm -fr .emacs.d .ssh .julia .ipython .conda .cache .keras .keras .mozilla .torch .cache
+rm -fr .emacs.d .ssh .julia .ipython .conda .cache .keras .keras .mozilla .torch .cache .linuxbrew
 rm -fr ~/.local/share/jupyter
 rm -fr ~/.local/bin/
 rm -fr ~/.ipython/
@@ -68,6 +64,7 @@ echo 'export PATH="/home/cdaniels/julia/bin:$PATH"'  >> ~/.bashrc
 export PATH="/home/cdaniels/julia/bin:$PATH"
 julia -e 'using Pkg; Pkg.add("IJulia")'
 cd
+echo julia installed...
 
 ## Add Anaconda
 cd ~
@@ -78,16 +75,17 @@ bash $ANACONDA_VERSION -b
 cd
 echo export PATH=~/anaconda3/bin:$PATH >> ~/.bashrc
 export PATH=~/anaconda3/bin:$PATH
-source ~/.bashrc
-conda init bash
+
+#source ~/.bashrc
+#conda init bash
 
 ## Create conda env
-conda create -n fastai python=python_version
-
+conda create -n scratch python=3.7
 conda init bash
-echo conda activate $conda_env >> .bashrc
+echo conda activate scratch >> .bashrc
 
-echo Sever Installed.
+##
+echo conda installed...
 echo *** install-scratch-1.sh: complete ***
 echo *** LOGOUT OF SHELL ***
 echo *** LOGOUT OF SHELL ***

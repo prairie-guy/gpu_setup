@@ -27,19 +27,9 @@
 
 
 ## Make sure your have previously installed fastai env with:
-## ``conda create -n scratch python=3.7``
-## SHOULD BE IN scratch ENV BEFORE RUNNING SCRIPT!!!
 
 ## Jupyter Setup
 conda install jupyter notebook
-
-## Setup Jupyter Notebook Configuration
-jupyter notebook --generate-config
-jupass=`python -c "from notebook.auth import passwd; print(passwd())"`
-echo "c.NotebookApp.password = u'"$jupass"'" >> ~/.jupyter/jupyter_notebook_config.py
-echo "c.NotebookApp.ip = '*'" >> ~/.jupyter/jupyter_notebook_config.py
-echo "c.NotebookApp.open_browser = False" >> ~/.jupyter/jupyter_notebook_config.py
-echo "c.NotebookApp.allow_remote_access = True" >> ~/.jupyter/jupyter_notebook_config.py
 
 # Add Jupyter Notebook Extensions, most importantly "Select CodeMirror Keymap" allows for emacs mode.
 pip install ipywidgets
@@ -56,17 +46,52 @@ echo "c.NotebookApp.ip = '*'" >> ~/.jupyter/jupyter_notebook_config.py
 echo "c.NotebookApp.open_browser = False" >> ~/.jupyter/jupyter_notebook_config.py
 echo "c.NotebookApp.allow_remote_access = True" >> ~/.jupyter/jupyter_notebook_config.py
 
+## conda-forge install tmux
+conda install -c conda-forge tmux
+
+## mosh install
+conda install -c conda-forge mosh
+
+# Install a script to launch mosh locally. This fix to allows emacs to work with Blink (over ssh) to use mosh (localhost).
+# Simply use: 'msh_up' as ~/bin is in the $PATH
+# NEED TO FIX passing $MOSH_UP to forward environments.
+file=~/bin/msh_up
+cat << EOF > $file
+#!/usr/bin/env bash
+if [ -z $MOSH_UP ]; then
+    mosh --server=/export/home/cdanie40/anaconda3/envs/scratch/bin/mosh-server localhost;
+    export MOSH_UP=UP
+    echo MOSH_UP is $MOSH_UP
+fi
+EOF
+chmod +x $file
+
+# Emacs configuration
+conda install -c conda-forge emacs
+cd
+rm -fr ~/.emacs.d
+git clone https://github.com/prairie-guy/emacs_dotfile.git .emacs.d
+cd .emacs.d
+./setup.sh
+cd
+
+echo Homebrew NOT installed. Edit file if needed
+exit
+
+## Homebrew NOT installed. Edit file if needed
+######################################################
 ## HomeBrew for linux
 # Add Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-echo Need to automate the scripts required by brew, in mean time
-echo run scripts manually, then add, emacs, tmux and mosh
-exit
+test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
+echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
+eval $(brew --prefix)/bin/brew shellenv
 
-# Update .bash_profile
-echo 'eval $(/home/cdaniels/.linuxbrew/bin/brew shellenv)' >> /home/cdaniels/.bash_profile
-eval $(/home/cdaniels/.linuxbrew/bin/brew shellenv)
+## Already installed by conda 
+exit
 
 # Emacs
 brew install emacs
@@ -81,5 +106,5 @@ cd
 # Brew Installs
 brew install tmux
 brew install mosh
-
+######################################################
 echo "Sucess: install-scratch-2.sh installed"
