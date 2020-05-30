@@ -1,5 +1,6 @@
 ## gpu_setup
-#### Used to setup a complete 16.04 Ubuntu Server for the fast.ai course. Includes installation of gpu related software
+#### Used to setup a complete 16.04 Ubuntu Server for the fast.ai course.
+Includes fresh install of Ubuntu software, GPU video drivers, CUDA frameworks and Anaconda. Julia and a number of other programs are installed. This setup assumes that the user has root access.
 
 - `install-gpu.sh` sets up a working server 
 - `install-fastai.sh` sets up fastai workspace
