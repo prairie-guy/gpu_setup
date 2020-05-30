@@ -1,4 +1,4 @@
-#gpu_setup
+# gpu_setup
 
 - `install-gpu.sh` sets up a working server 
 - `install-fastai.sh` sets up fastai workspace
