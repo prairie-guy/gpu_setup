@@ -60,6 +60,10 @@ echo "c.NotebookApp.allow_remote_access = True" >> ~/.jupyter/jupyter_notebook_c
 # Add Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
+echo Need to automate the scripts required by brew, in mean time
+echo run scripts manually, then add, emacs, tmux and mosh
+exit
+
 # Update .bash_profile
 echo 'eval $(/home/cdaniels/.linuxbrew/bin/brew shellenv)' >> /home/cdaniels/.bash_profile
 eval $(/home/cdaniels/.linuxbrew/bin/brew shellenv)
