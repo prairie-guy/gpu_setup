@@ -140,7 +140,9 @@ pip install funcy
 
 # Create a conda env for fastai
 # NOTE: THIS MUST BE SET BEFORE DOWNLOADING INTO fastai env
-conda create -n fastai python=3.6
+# NOTE: CHANGED TO pythone=3.7 (MAY NOT WORK WITH FASTAI CODE)
+#conda create -n fastai python=3.6
+conda create -n fastai python=3.7
 conda init bash
 echo conda activate fastai >> .bashrc
 

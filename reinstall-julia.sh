@@ -17,10 +17,23 @@ set -e
 set -o xtrace
 DEBIAN_FRONTEND=noninteractive
 
+# Clean Up
+cd
+rm -fr julia
+rm -fr .julia
+
+
 ## Install Julia 
 cd
+## VEERSION 1.3
+#JULIA_VERSION='julia-1.3.1-linux-x86_64.tar.gz'
+#JULIA_V='1.3'
+
+## VERSION 1.4
 JULIA_VERSION='julia-1.4.1-linux-x86_64.tar.gz'
 JULIA_V='1.4'
+
+# Download
 wget https://julialang-s3.julialang.org/bin/linux/x64/$JULIA_V/$JULIA_VERSION
 mkdir tmp
 tar xfv $JULIA_VERSION -C tmp

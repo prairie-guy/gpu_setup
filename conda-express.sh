@@ -26,7 +26,9 @@ conda install -c fastai/label/test pillow-simd
 
 ## Jupyter Setup
 conda install jupyter notebook
-conda install -c conda-forge jupyter_contrib_nbextensions
+
+## Commented out for debugging
+# conda install -c conda-forge jupyter_contrib_nbextensions
 
 ## Late Installs
 conda install scikit-learn 
