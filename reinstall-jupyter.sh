@@ -24,4 +24,8 @@ echo "c.NotebookApp.ip = '*'" >> ~/.jupyter/jupyter_notebook_config.py
 echo "c.NotebookApp.open_browser = False" >> ~/.jupyter/jupyter_notebook_config.py
 echo "c.NotebookApp.allow_remote_access = True" >> ~/.jupyter/jupyter_notebook_config.py
 
+# Fix/Add WebIO
+julia -e 'using Pkg; Pkg.build("WebIO")'
+julia -e 'using WebIO, IJulia; WebIO.install_jupyter_nbextension()'
+
 echo "Done"
