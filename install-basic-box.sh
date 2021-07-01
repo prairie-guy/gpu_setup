@@ -19,9 +19,9 @@
 #   1) apt-get install git openssh-server
 #   2) mkdir .ssh; cd .ssh
 #   3) ssh-keygen -t rsa -b 4096 -C cdaniels@nandor.net
-#   4) In order to use ssh git@github, need to:
+#   4) In order to use ssh git@github, MUST do the following:
 #       a) add id_rsa.pub to https://github.com/settings/keys
-#       b) Search and replace 'https://github.com/' with 'git@github.com:'
+#       b) If NOT, search and replace 'git@github.com:' with 'https://github.com/' in script
 #   5) git clone https://github.com/prairie-guy/gpu_setup.git |
 #      git clone git@github.com:prairie-guy/gpu_setup.git
 #   6) cd gpu_setup
@@ -84,10 +84,10 @@ rm -fr ~/.emacs.d
 
 ## Install Doom Emacs
 # Personal configuration
-git clone https://github.com/prairie-guy/doom-emacs_dot_file.git .doom.d
+git clone git@github.com:prairie-guy/doom-emacs_dot_file.git .doom.d
 
 # Download and setup doom emacs
-git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+git clone git@github.com:hlissner/doom-emacs ~/.emacs.d
 ~/.emacs.d/bin/doom install
 
 ## Install Julia 
