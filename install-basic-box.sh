@@ -43,15 +43,11 @@ ANACONDA_VERSION='Anaconda3-2021.05-Linux-x86_64.sh'
 #
 ######################################################
 
-# Install
-set -e
-set -o xtrace
-DEBIAN_FRONTEND=noninteractive
 
 # Clean up in case this is a reinstall
 cd ~
-rm -fr anaconda3 julia downloads data bin tmp scratch projects
-rm -fr .emacs.d .ssh .julia .ipython .conda .cache .keras .keras .mozilla .torch .cache .linuxbrew
+rm -fr anaconda3 julia downloads data bin tmp scratch projects junk
+rm -fr .emacs.d .julia .ipython .conda .cache .keras .keras .mozilla .torch .cache .linuxbrew .bashrc .bash_profile
 rm -fr ~/.local/share/jupyter
 rm -fr ~/.local/bin/
 rm -fr ~/.ipython/
@@ -60,16 +56,12 @@ rm -fr ~/.ipython/
 cp -f gpu_setup/dot_files/.bashrc .
 cp -f gpu_setup/dot_files/.bash_profile .
 
-# Set up Local file structure
-cd
-mkdir bin scratch downloads junk
-
 # Install key packages, including  openssh-server
 sudo apt-get --assume-yes install openssh-server tmux build-essential gcc g++ make binutils git zip software-properties-common curl mosh ripgrep fd-find joe jpeginfo
 
 # Set up Local file structure
 cd
-mkdir bin scratch downloads
+mkdir bin scratch junk
 
 ## Set up emacs
 # emacs 26 is not part of Ubuntu 20.04, so need to add repository
@@ -87,7 +79,7 @@ rm -fr ~/.emacs.d
 git clone git@github.com:prairie-guy/doom-emacs_dot_file.git .doom.d
 
 # Download and setup doom emacs
-git clone git@github.com:hlissner/doom-emacs ~/.emacs.d
+git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
 ~/.emacs.d/bin/doom install
 
 ## Install Julia 
