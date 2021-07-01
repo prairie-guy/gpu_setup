@@ -74,7 +74,7 @@ echo export PATH="~/.emacs.d/bin:$PATH" >> ~/.bashrc
 cd
 rm -fr ~/.emacs.d
 
-## Install Doom Emacs
+## Add Doom Emacs
 # Personal configuration
 git clone git@github.com:prairie-guy/doom-emacs_dot_file.git .doom.d
 
