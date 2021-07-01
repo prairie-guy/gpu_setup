@@ -1,8 +1,20 @@
 ## gpu_setup
 #### Used to setup a complete 16.04 Ubuntu Server for the fast.ai course.
-Includes fresh install of Ubuntu software, GPU video drivers, CUDA frameworks and Anaconda. Julia and a number of other programs are installed. This setup assumes that the user has root access.
+Includes fresh install of Ubuntu software, GPU video drivers, CUDA frameworks and Anaconda. Julia and a number of other programs are installed. This 
+setup assumes that the user has root access.
 
-- `install-gpu.sh` sets up a working server 
+- `install-gpu.sh` sets up a working server
+0. Do a fresh install of Ubuntu 
+1. apt-get install git openssh-server
+2. cd .ssh
+3. ssh-keygen -t rsa -b 4096 -C cdaniels@nandor.net
+4. In order to use ssh git@github, need to:
+ a. add id_rsa.pub to https://github.com/settings/keys
+ b. search and replace 'https://github.com/' with 'git@github.com:'
+5. git clone https://github.com/prairie-guy/gpu_setup.git
+6. cd gpu_setup
+7. ./install-gpu.sh
+
 - `install-fastai.sh` sets up fastai workspace
 
 Be sure to install in this order. Anaconda is loaded in `install-gpu.sh` and sets up the `fastai` conda env. Before using `install-fastai.sh`, be sure that `conda activate fastai` has been executed so as to be in the correct environment.
