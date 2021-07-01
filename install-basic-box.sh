@@ -24,7 +24,7 @@
 #       b) Search and replace 'https://github.com/' with 'git@github.com:'
 #   5) git clone https://github.com/prairie-guy/gpu_setup.git
 #   6) cd gpu_setup
-#   7) ./install-gpu.sh
+#   7) ./install-basic-box.sh
 #   8) Edit .bashrc file to remove unwanted stuff
 #
 ######################################################
