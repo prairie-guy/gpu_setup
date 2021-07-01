@@ -11,7 +11,7 @@ setup assumes that the user has root access.
 4. In order to use ssh git@github, need to:
  a. add id_rsa.pub to https://github.com/settings/keys
  b. search and replace 'https://github.com/' with 'git@github.com:'
-5. git clone https://github.com/prairie-guy/gpu_setup.git
+5. git clone https://github.com/prairie-guy/gpu_setup.git | git@github.com:prairie-guy/gpu_setup.git
 6. cd gpu_setup
 7. ./install-gpu.sh
 
