@@ -20,18 +20,20 @@ DEBIAN_FRONTEND=noninteractive
 # Clean Up
 cd
 rm -fr julia
-rm -fr .julia
+# Keep old .julia pacakges for now
+#rm -fr .julia
 
 
 ## Install Julia 
 cd
-## VEERSION 1.3
-#JULIA_VERSION='julia-1.3.1-linux-x86_64.tar.gz'
-#JULIA_V='1.3'
 
 ## VERSION 1.4
-JULIA_VERSION='julia-1.4.1-linux-x86_64.tar.gz'
-JULIA_V='1.4'
+# JULIA_VERSION='julia-1.4.1-linux-x86_64.tar.gz'
+# JULIA_V='1.4'
+
+## VERSION 1.6
+JULIA_VERSION='julia-1.6.0-linux-x86_64.tar.gz'
+JULIA_V='1.6'
 
 # Download
 wget https://julialang-s3.julialang.org/bin/linux/x64/$JULIA_V/$JULIA_VERSION
