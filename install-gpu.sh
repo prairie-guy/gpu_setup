@@ -6,11 +6,17 @@
 # Install a cuda, nvida gpu capable machine for use with fast.ai
 # Install a generally useful environment
 # This script is designed to work with ubuntu 20.04 LTS
-
-# USE: 1) apt-get install git
-#      2) git clone https://github.com/prairie-guy/gpu_setup.git
-#      3) cd gpu_setup
-#      4) ./install-gpu.sh
+#
+# USE:
+# 1) apt-get install git openssh-server
+# 2) cd .ssh
+# 3) ssh-keygen -t rsa -b 4096 -C cdaniels@nandor.net
+# 4) In order to use ssh git@github, need to:
+#   a) add id_rsa.pub to https://github.com/settings/keys
+#   b) Search and replace 'https://github.com/' with 'git@github.com:'
+# 5) git clone https://github.com/prairie-guy/gpu_setup.git
+# 6) cd gpu_setup
+# 7) ./install-gpu.sh
 
 # Install
 set -e
