@@ -2,8 +2,8 @@
 
 ## Add Anaconda
 cd ~
-#ANACONDA_VERSION='Anaconda3-2019.03-Linux-x86_64.sh'
-ANACONDA_VERSION='Anaconda3-2020.02-Linux-x86_64.sh'
+
+ANACONDA_VERSION='Anaconda3-2021.05-Linux-x86_64.sh'
 sudo rm -fr ~/.cache # Hack. Not sure where this comes from, but it screws things up
 cd ~/downloads/
 wget https://repo.continuum.io/archive/$ANACONDA_VERSION
@@ -14,7 +14,7 @@ export PATH=~/anaconda3/bin:$PATH
 source ~/.bashrc
 conda init bash
 
-conda create -n fastai python=3.6
+conda create -n fastai python=3.8
 
 conda init bash
 echo conda activate fastai >> .bashrc
