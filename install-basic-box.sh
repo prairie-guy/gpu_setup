@@ -17,12 +17,13 @@
 #
 # USE:
 #   1) apt-get install git openssh-server
-#   2) cd .ssh
+#   2) mkdir .ssh; cd .ssh
 #   3) ssh-keygen -t rsa -b 4096 -C cdaniels@nandor.net
 #   4) In order to use ssh git@github, need to:
 #       a) add id_rsa.pub to https://github.com/settings/keys
 #       b) Search and replace 'https://github.com/' with 'git@github.com:'
-#   5) git clone https://github.com/prairie-guy/gpu_setup.git
+#   5) git clone https://github.com/prairie-guy/gpu_setup.git |
+#      git clone git@github.com:prairie-guy/gpu_setup.git
 #   6) cd gpu_setup
 #   7) ./install-basic-box.sh
 #   8) Edit .bashrc file to remove unwanted stuff
