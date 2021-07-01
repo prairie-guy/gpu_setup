@@ -57,7 +57,7 @@ cp -f gpu_setup/dot_files/.bashrc .
 cp -f gpu_setup/dot_files/.bash_profile .
 
 # Install key packages, including  openssh-server
-sudo apt-get --assume-yes install openssh-server tmux build-essential gcc g++ make binutils git zip software-properties-common curl mosh ripgrep fd-find joe jpeginfo cmake libtool-bin
+sudo apt-get --assume-yes install openssh-server tmux build-essential gcc g++ make binutils git zip software-properties-common curl mosh ripgrep fd-find joe jpeginfo cmake libtool-bin xlcip libvterm-dev
 
 # Set up Local file structure
 cd
