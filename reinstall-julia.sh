@@ -32,8 +32,13 @@ cd
 # JULIA_V='1.4'
 
 ## VERSION 1.6
-JULIA_VERSION='julia-1.6.0-linux-x86_64.tar.gz'
-JULIA_V='1.6'
+# JULIA_VERSION='julia-1.6.0-linux-x86_64.tar.gz'
+# JULIA_V='1.6'
+
+## VERSION 1.7
+JULIA_VERSION='julia-1.7.0-linux-x86_64.tar.gz'
+JULIA_V='1.7'
+
 
 # Download
 wget https://julialang-s3.julialang.org/bin/linux/x64/$JULIA_V/$JULIA_VERSION
