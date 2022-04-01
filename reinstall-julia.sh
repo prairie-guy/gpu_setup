@@ -36,7 +36,11 @@ cd
 # JULIA_V='1.6'
 
 ## VERSION 1.7
-JULIA_VERSION='julia-1.7.0-linux-x86_64.tar.gz'
+# JULIA_VERSION='julia-1.7.0-linux-x86_64.tar.gz'
+# JULIA_V='1.7'
+
+## VERSION 1.7
+JULIA_VERSION='julia-1.7.2-linux-x86_64.tar.gz'
 JULIA_V='1.7'
 
 
