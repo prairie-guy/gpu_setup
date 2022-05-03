@@ -24,6 +24,7 @@ pip install -U fastbook
 
 ## Late Installs
 conda install scikit-learn
+pip install nbdev
 
 ## Kaggle
 pip install kaggle
