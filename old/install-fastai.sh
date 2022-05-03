@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 ## 2nd Part of gpu_setup
