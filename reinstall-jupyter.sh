@@ -16,8 +16,8 @@
 read -r -p "Clean up jupyter environment? If you just ran 'reinstall-fastai.sh' enter: 'n' [Y/n] " input
 case $input in
       [yY][eE][sS]|[yY])
-          conda remove jupyter notebook ipython
-          conda remove -c conda-forge jupyter_contrib_nbextensions
+          mamba remove jupyter notebook ipython
+          mamba remove -c conda-forge jupyter_contrib_nbextensions
           rm -fr ~/.jupyter/
           rm -fr ~/.local/share/jupyter
           rm -fr ~/.local/bin/
@@ -26,12 +26,11 @@ case $input in
 esac
 
 ## Jupyter Setup
-conda install jupyter notebook ipython
+mamba install jupyter notebook ipython
 
 ## Jupyter Extensions
-conda install -c conda-forge jupyter_contrib_nbextensions
+mamba install -c conda-forge jupyter_contrib_nbextensions
 jupyter contrib nbextension install --user
-conda install -c conda-forge jupyter_nbextensions_configurator
 
 # Set up Julia in Juypter
 julia -e 'using Pkg; Pkg.add("IJulia")'

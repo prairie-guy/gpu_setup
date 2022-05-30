@@ -16,18 +16,31 @@
 ## 3. conda create -n fastai python=3.9
 ## 4. conda init bash
 ## 5. conda activate fastai
-## 5. reinstall-fastai.sh
+## 6. reinstall-fastai.sh
 
 ### Install fastai stuff
-conda install -c fastchan fastai anaconda
-pip install -U fastbook
+mamba install -c fastchan fastai
 
-## Late Installs
-conda install scikit-learn
+## Mamba installs
+mamba install torchaudio -c pytorch
+mamba install scikit-learn
+mamba install datasets transformers
+mamba install kaggle
+
+# pip installs
+pip install -U fastbook
 pip install nbdev
 
-## Kaggle
-pip install kaggle
+## Faster image processing
+## `libjpeg-turbo` (2-6x) and `Pillow-SIMD ` (4-6)
+## No TIFF support; if required (https://docs.fast.ai/dev/performance.html#faster-image-processing)
+## Uncomment to include
+# conda uninstall -y --force pillow pil jpeg libtiff libjpeg-turbo
+# pip   uninstall -y  pillow pil jpeg libtiff libjpeg-turbo
+# conda install -yc conda-forge libjpeg-turbo
+# CFLAGS="${CFLAGS} -mavx2" pip -v install --upgrade --no-cache-dir --force-reinstall --no-binary :all: --compile pillow-simd
+# conda install -y jpeg libtiff
+
 
 ## To add jupyter:
 ## run reinstall-jupyter.sh
