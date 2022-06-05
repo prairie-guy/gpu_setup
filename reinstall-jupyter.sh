@@ -29,7 +29,7 @@ esac
 mamba install jupyter notebook ipython
 
 ## Jupyter Extensions
-mamba install -c conda-forge jupyter_contrib_nbextensions
+mamba install -c conda-forge jupyter_contrib_nbextensions tmux
 jupyter contrib nbextension install --user
 
 # Set up Julia in Juypter
