@@ -10,10 +10,9 @@
 mamba install -c fastchan fastai
 
 ## Mamba installs
-mamba install torchaudio -c pytorch
 mamba install scikit-learn
 mamba install datasets transformers protobuf
-mamba install kaggle
+mamba install kaggle tweepy emoji
 
 # pip installs
 pip install -U fastbook
