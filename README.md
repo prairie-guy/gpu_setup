@@ -37,11 +37,11 @@ Be sure to install in this order. Anaconda is loaded in `install-scratch-1.sh` a
 Two scripts to set up a fully capable machine learning server. Uses cases would be setting up servers on `AWS`, `Codespaces` or `Paperspaces`.
 
 1. `install-server-mamba-1.sh` sets up a user based mamba environment. This can be done as follows:
-  - wget https://raw.githubusercontent.com/prairie-guy/gpu_setup/master/install-server-mamba-1.sh 
-  - chmod +x install-server-mamba-1.sh
-  - ./install-server-mamba-1.sh
+  - `wget https://raw.githubusercontent.com/prairie-guy/gpu_setup/master/install-server-mamba-1.sh` 
+  - `chmod +x install-server-mamba-1.sh`
+  - `./install-server-mamba-1.sh`
 2. Exit shell (ctr-d)
 3. `install-server-fastai-2.sh` sets up fastai, Transformers, ipython, jupyter, julia and many other machine learning packages.
-  - wget https://raw.githubusercontent.com/prairie-guy/gpu_setup/master/install-server-fastai-2.sh
-  - chmod +x install-server-fastai-2.sh
-  - ./install-server-fastai-2.sh
+  - `wget https://raw.githubusercontent.com/prairie-guy/gpu_setup/master/install-server-fastai-2.sh`
+  - `chmod +x install-server-fastai-2.sh`
+  - `./install-server-fastai-2.sh`
