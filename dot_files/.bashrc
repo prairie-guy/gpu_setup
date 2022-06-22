@@ -148,11 +148,21 @@ alias emacs='emacs -nw'
 export EDITOR='emacs -nw'
 #export VISUAL='emacs -nw'
 
+# repl for Babashka, native Clojure interpreter. bb installed in ~/bin as a binary
+alias bbr='rlwrap bb'
+export BABASHKA_PRELOADS="(require '[clojure.java.shell :refer [sh]])"
+_bb_tasks() {
+    COMPREPLY+=(`bb tasks |tail -n +3 |cut -f1 -d ' '`)
+}
+# autocomplete filenames as well
+complete -f -F _bb_tasks bb
+
 # Install required for emacs-doom
 # Need to install rg (fast version of grep) and fd (easier versions of find) and jq (command-line for JSON)
 export PATH="~/.emacs.d/bin:$PATH"
 alias rgrep="rg"
 
+# bat (cat teplacement)installed as ln -s /usr/bin/batcat ~/pbin/bat
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/cdaniels/google-cloud-sdk/path.bash.inc' ]; then source '/home/cdaniels/google-cloud-sdk/path.bash.inc'; fi
@@ -163,16 +173,16 @@ if [ -f '/home/cdaniels/google-cloud-sdk/completion.bash.inc' ]  ; then source /
 export CUDA_DEVICE_ORDER=PCI_BUS_ID
 #export CUDA_VISIBLE_DEVICES=1,2
 #export CUDA_VISIBLE_DEVICES=2,1
-export CUDA_VISIBLE_DEVICES=1,2
+export CUDA_VISIBLE_DEVICES=1,2 # ADDED `0` 6/17/2022
 
 nvidia-smi -pm ENABLED &> /dev/null
 nvidia-smi -ac 850,1912 &> /dev/null
 
 # Enable CUDA bin programs
-export PATH="/usr/local/cuda-10.1/bin:/usr/local/cuda-10.1/NsightCompute-2019.1:$PATH"
+#export PATH="/usr/local/cuda-10.1/bin:/usr/local/cuda-10.1/NsightCompute-2019.1:$PATH"
 
 # Python path to allow ai_utilites and fastbook (needed because there are problem pip install)
-export PYTHONPATH=${PYTHONPATH}:${HOME}
+#export PYTHONPATH=${PYTHONPATH}:${HOME}
 export PYTHONPATH=${PYTHONPATH}:"/home/cdaniels/python_modules/"
 
 # add to PATH
@@ -182,23 +192,9 @@ export PATH="/home/cdaniels/julia/bin:$PATH"
 # Set maximum size of JVM for use with Java-JVM for use by Clojure
 export _JAVA_OPTIONS=-Xmx4096m
 
-export HYSTARTUP="/home/cdaniels/bin/startup.hy"
+#export HYSTARTUP="/home/cdaniels/bin/startup.hy"
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/cdaniels/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/cdaniels/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/cdaniels/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/cdaniels/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+# julia path
+export PATH="/home/cdaniels/julia/bin:$PATH"
 
-#export PYTHONPATH=:/home/cdaniels/fastai
-
-conda activate fastai
+# z for cd and fzf for fuzzy finding
