@@ -17,10 +17,16 @@ bash Mambaforge-$(uname)-$(uname -m).sh
 rm Mambaforge-Linux*
 ~/mambaforge/bin/conda init bash
 
+## Activate fastai enviromnent
+conda activate base
+conda remove --name fastai --all
+conda create -n fastai python=3.10
+conda init bash
+conda activate fastai
 
 ######################################################################
 ## CRITICAL THAT WE RELOAD SHELL AFTER THIS FOR CONDA TO WORK       ## 
-## Next Install fastai: fastai_setup.sh                             ##
+## Next Install fastai: install-server-fastai-2.sh                  ##
 ######################################################################
 
 echo "done: install-server-mamba-1.sh"
