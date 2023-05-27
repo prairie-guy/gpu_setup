@@ -10,6 +10,12 @@
 ## Clearn up
 cd
 rm -fr mambaforge* Mambaforge*
+rm -fr .conda
+rm -fr .local/share/jupyter/
+rm -fr .local/etc/jupyter
+rm -fr .local/share/julia
+rm -fr .julia
+
 
 ## Mamba
 curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
@@ -20,7 +26,7 @@ rm Mambaforge-Linux*
 ## Activate fastai enviromnent
 conda activate base
 conda remove --name fastai --all
-conda create -n fastai python=3.10
+conda create -n fastai python=3.11 # python=3.10
 conda init bash
 conda activate fastai
 
