@@ -33,15 +33,19 @@ conda-forge is used to install emacs, tmux and mosh. emacs.d is then configured 
 
 Be sure to install in this order. Anaconda is loaded in `install-scratch-1.sh` and sets up the `scratch` conda env. Before using `install-scratch-2.sh`, be sure that `conda activate fastai` has been executed so as to be in the correct environment.
 
-## install-server-mamba-1.sh and install-server-fastai-2.sh
+## install-server-mamba-1.sh, install-server-fastai-2.sh and install-server-julia-3.sh
 Two scripts to set up a fully capable machine learning server. Uses cases would be setting up servers on `AWS`, `Codespaces` or `Paperspaces`.
 
 1. `install-server-mamba-1.sh` sets up a user based mamba environment. This can be done as follows:
-  - `wget https://raw.githubusercontent.com/prairie-guy/gpu_setup/master/install-server-mamba-1.sh` 
-  - `chmod +x install-server-mamba-1.sh`
-  - `./install-server-mamba-1.sh`
+  - wget https://raw.githubusercontent.com/prairie-guy/gpu_setup/master/install-server-mamba-1.sh 
+  - chmod +x install-server-mamba-1.sh
+  - ./install-server-mamba-1.sh
 2. Exit shell (ctr-d)
 3. `install-server-fastai-2.sh` sets up fastai, Transformers, ipython, jupyter, julia and many other machine learning packages.
-  - `wget https://raw.githubusercontent.com/prairie-guy/gpu_setup/master/install-server-fastai-2.sh`
-  - `chmod +x install-server-fastai-2.sh`
-  - `./install-server-fastai-2.sh`
+  - wget https://raw.githubusercontent.com/prairie-guy/gpu_setup/master/install-server-fastai-2.sh
+  - chmod +x install-server-fastai-2.sh
+  - ./install-server-fastai-2.sh
+4. `install-server-julia-3.sh` downloads julia and IJulia. NOTE: The script needs to be updated to latest version.
+  - wget https://raw.githubusercontent.com/prairie-guy/gpu_setup/master/install-server-julia-3.sh
+  - chmod +x install-server-julia-3.sh
+  - ./install-server-julia-3.sh
