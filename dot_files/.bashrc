@@ -1,3 +1,5 @@
+#### CBD .bashrc file: 9/3/2023
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -47,12 +49,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 
@@ -112,18 +114,22 @@ if ! shopt -oq posix; then
   fi
 fi
 
-## -----------------------
-## -- alias
-## -----------------------
+
+#### CBD Edits -----------------------
 
 
-# Safety
+### CBD local ~/bin
+export PATH="/home/cdaniels/bin:$PATH"
+
+
+### Aliases -----------------------
+## Safety
 alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
 set -o noclobber
 
-# Listing, directories, and motion
+## Listing, directories, and motion
 alias ll="ls -alrtF --color"
 alias la="ls -A"
 alias l="ls -CF"
@@ -137,32 +143,93 @@ alias cl='clear'
 alias du='du -ch --max-depth=1'
 alias treeacl='tree -A -C -L 2'
 
-# Text and editor commands
+## Text and editor commands
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 
+### Emacs -----------------------
+# Install required for emacs-doom (suggestted rg, fd and jq be installed)
+export PATH="~/.emacs.d/bin:$PATH"
 
-# emacs
 alias em='emacs -nw'
 alias emacs='emacs -nw'
+#alias emacs='emacsclient -a emacs'
 export EDITOR='emacs -nw'
-#export VISUAL='emacs -nw'
+#export EDITOR='emacsclient -a emacs'
 
-# Install required for emacs-doom
-# Need to install rg (fast version of grep) and fd (easier versions of find) and jq (command-line for JSON)
-export PATH="~/.emacs.d/bin:$PATH"
-alias rgrep="rg"
 
-# bat (cat teplacement)installed as ln -s /usr/bin/batcat ~/pbin/bat
+###  Modern Shell Commands -----------------------
+##  Installed with apt or git and then linked to ~/bin
 
-# Python path to allow ai_utilites and fastbook (needed because there are problem pip install)
+## rg (grep replacement): ln -s /usr/bin/rgrep ~/bin/rg
+
+## dust (du replacement)
+
+## fd (fdfind rep): ln -s /usr/bin/fdfiind ~/bin/fd
+
+## bat (cat replacement; installed as batcat); ln -s /usr/bin/batcat ~/bin/bat
+
+## jq (JSON processor)
+
+##  fzf (fuzzy finder, git fixes autocompletion: https://github.com/junegunn/fzf#fuzzy-completion-for-bash-and-zsh ): ln -s ~/.fzf/bin/fzf ~/bin/fz
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+
+
+
+#### Optional Non-Standard Configurations
+
+### Julia -----------------------
+export PATH="/home/cdaniels/julia/bin:$PATH"
+
+
+### Java (used by Clojure)
+export _JAVA_OPTIONS=-Xmx4096m
+
+
+### Python -----------------------
+##  path to allow ai_utilites and fastbook (needed because there are problem pip install)
 #export PYTHONPATH=${PYTHONPATH}:${HOME}
 export PYTHONPATH=${PYTHONPATH}:"/home/cdaniels/python_modules/"
 
-# add to PATH
-export PATH="/home/cdaniels/bin:$PATH"
-export PATH="/home/cdaniels/julia/bin:$PATH"
 
+### CUDA -----------------------
+# Set up default CUDA gpus. Here we assume that gpu=0 is reserved for the display
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
+#export CUDA_VISIBLE_DEVICES=1,2
+#export CUDA_VISIBLE_DEVICES=2,1
+#export CUDA_VISIBLE_DEVICES=1,2 # ADDED `0` 6/17/2022
+nvidia-smi -pm ENABLED &> /dev/null
+nvidia-smi -ac 850,1912 &> /dev/null
+
+# Enable CUDA bin programs
+# export PATH="/usr/local/cuda-10.1/bin:/usr/local/cuda-10.1/NsightCompute-2019.1:$PATH"
+export PATH=/usr/local/cuda-12./bin${PATH:+:${PATH}}
+
+
+### Babashka -----------------------
+# repl for Babashka, native Clojure interpreter. bb installed in ~/bin as a binary
+alias bbr='rlwrap bb'
+export BABASHKA_PRELOADS="(require '[clojure.java.shell :refer [sh]])"
+_bb_tasks() {
+    COMPREPLY+=(`bb tasks |tail -n +3 |cut -f1 -d ' '`)
+}
+# autocomplete filenames as well
+complete -f -F _bb_tasks bb
+
+
+### Google Cloud SDK -----------------------
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/cdaniels/google-cloud-sdk/path.bash.inc' ]; then source '/home/cdaniels/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/cdaniels/google-cloud-sdk/completion.bash.inc' ]  ; then source /home/cdaniels/google-cloud-sdk/completion.bash.inc; fi
+
+
+#### Mamba Initialization
+## Add mamba directly or with https://github.com/prairie-guy/gpu_setup/blob/master/install-server-mamba-1.sh
+##
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/cdaniels/mambaforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -181,3 +248,4 @@ if [ -f "/home/cdaniels/mambaforge/etc/profile.d/mamba.sh" ]; then
     . "/home/cdaniels/mambaforge/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
+mamba activate fastai
